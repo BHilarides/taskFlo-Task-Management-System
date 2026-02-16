@@ -1,2 +1,9 @@
-# taskFlo-Task-Management-System
-Greenfield Project for Ben Hilarides and Mariea Nies
+<h1>WEB 450</h1>
+<h2>Greenfield Project</h2>
+<h3>taskFlo Task Management System</h3>
+<h2>Contributors</h2>
+<ul>
+  <li>Richard Krasso</li>
+  <li>Mariea Nies</li>
+  <li>Ben Hilarides</li>
+</ul>
