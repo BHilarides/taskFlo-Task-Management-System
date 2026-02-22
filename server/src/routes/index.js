@@ -1,5 +1,6 @@
 /**
  * Author: Professor Krasso
+ * Edited By: Ben Hilarides, Mariea Nies
  * Date: 7 August 2024
  * File: index.js
  * Description: Routing for the index page.
@@ -34,7 +35,7 @@ const router = express.Router();
  * // }
  */
 router.get('/', function(req, res, next) {
-  const appName = 'Task Management System';
+  const appName = 'taskFlo Task Management System';
   res.send({
     message: `Hello from the ${appName} server!`
   });
