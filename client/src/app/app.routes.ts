@@ -1,9 +1,13 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { Dashboard } from './features/dashboard/dashboard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  }
+  {path: '', component: Dashboard }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

@@ -1,0 +1,11 @@
+<div
+  class="card"
+  [ngClass]="{
+    'urgent': title.includes('Urgent'),
+    'week': title.includes('Week'),
+    'overdue': title.includes('Overdue')
+  }"
+>
+  <h4>{{ title }}</h4>
+  <p>{{ count }}</p>
+</div>

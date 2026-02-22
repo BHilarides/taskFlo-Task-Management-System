@@ -1,0 +1,16 @@
+<section class="dashboard">
+  <section class="summary">
+    <app-summary-card title="Urgent Tasks" [count]="12"></app-summary-card>
+    <app-summary-card title="This Week" [count]="28"></app-summary-card>
+    <app-summary-card title="Overdue" [count]="3"></app-summary-card>
+  </section>
+
+  <section class="projects">
+    <h3>Recent Projects</h3>
+    <app-recent-projects>Recent Projects</app-recent-projects>
+  </section>
+
+  <section class="actions">
+    <app-quick-actions>Quick Actions</app-quick-actions>
+  </section>
+</section>

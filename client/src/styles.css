@@ -1,8 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-  font-family: 'Roboto', sans-serif;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100%;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+  --blue: #1e3a8a;  /* Primary */
+  --red: #ef4444;   /* Urgent */
+  --yellow: #facc15; /* Warning / This Week */
+  --green: #22c55e;  /* Success */
+  --dark: #111827;
+  --light: #ffffff;
+  --gray: #e5e7eb;
+}
+body {
+ background: #f4f6fb;
+ color: #1f2937;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.container {
+  padding: 20px;
 }
 

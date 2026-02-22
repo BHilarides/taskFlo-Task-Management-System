@@ -1,29 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { App } from './app/app.component';
 
-describe('AppComponent', () => {
+describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [App],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'ets-client' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('ets-client');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+  it('should render title', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome to the MEAN Stack Starter Project');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, taskFlo');
   });
 });
