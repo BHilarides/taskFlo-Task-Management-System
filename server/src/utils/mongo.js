@@ -11,7 +11,7 @@ const { MongoClient } = require('mongodb')
 const config = require('./config')
 
 // Connection string for MongoDB Atlas
-const MONGO_URL = config.mongoURI;
+const MONGO_URL = config.dbUrl;
 
 const mongo = async(operations, next) => {
   try {

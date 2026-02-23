@@ -118,6 +118,7 @@ export class TaskListComponent implements OnInit {
   }
 
   loadTasks(): void {
+    console.log('Neb component - API URL:', `${environment.apiBaseUrl}/tasks`);
     this.loading = true;
     this.http.get(`${environment.apiBaseUrl}/tasks`).subscribe({
       next: (data: any) => {

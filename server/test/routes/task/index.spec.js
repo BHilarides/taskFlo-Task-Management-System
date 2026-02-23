@@ -207,4 +207,102 @@ describe('Task API Tests', () => {
         expect(res.body.data.length).toBeGreaterThan(0);
         expect(res.body.data[0].title).toBe('Test Task');
     });
+
+    describe('POST /api/tasks - Create a new task', () => {
+        it('should return a 201 status code', async () => {
+            const newTask = {
+                title: 'Test Task',
+                description: 'Test Description',
+                status: 'Pending',
+                priority: 'High',
+                projectId: '200000000000000000000001',
+                dueDate: new Date('2026-02-28')
+            };
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        insertOne: jest.fn().mockResolvedValue({
+                            insertedId: '300000000000000000000001' 
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            const response = await request(app)
+                .post('/api/tasks')
+                .send(newTask);
+
+            expect(response.status).toBe(201);
+        });
+
+        it('should return success response with created task data', async () => {
+            const newTask = {
+                title: 'New Feature Task',
+                description: 'Implement new feature',
+                status: 'In Progress',
+                priority: 'Medium',
+                projectId: '200000000000000000000002',
+                dueDate: new Date('2026-03-15')
+            };
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        insertOne: jest.fn().mockResolvedValue({
+                            insertedId: '300000000000000000000099'
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            const response = await request(app)
+                .post('/api/tasks')
+                .send(newTask);
+
+            expect(response.body.success).toBe(true);
+            expect(response.body.data).toBeDefined();
+            expect(response.body.message).toBe('Task created successfully');
+        });
+
+        it('should save task with all required fieldsto database', async () => {
+            const newTask = {
+                title: 'Complete Documentation',
+                description: 'Write API docs',
+                status: 'Pending',
+                priority: 'Low',
+                projectId: '200000000000000000000003',
+                dueDate: new Date('2026-03-30')
+            };
+
+            let savedTask;
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        insertOne: jest.fn().mockImplementation((task) => {
+                            savedTask = task;
+                            return Promise.resolve({ insertId: task._id });
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            await request(app)
+                .post('/api/tasks')
+                .send(newTask);
+
+            expect(savedTask).toBeDefined();
+            expect(savedTask.title).toBe(newTask.title);
+            expect(savedTask.description).toBe(newTask.description);
+            expect(savedTask.status).toBe(newTask.status);
+            expect(savedTask.priority).toBe(newTask.priority);
+            expect(savedTask.projectId).toBe(newTask.projectId);
+            expect(savedTask.dateCreated).toBeDefined();
+            expect(savedTask.dateModified).toBeDefined();
+        });
+    });
 });

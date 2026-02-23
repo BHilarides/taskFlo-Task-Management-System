@@ -1,6 +1,6 @@
 /**
  * Dashboard Page
- * Purpose - Acts as the main landing page for the applicatio and provides a high-level
+ * Purpose - Acts as the main landing page for the application and provides a high-level
  * overview of tasks and navigation.
  * Features: Displays summary cards(Urgent, This Week, Overdue)
  * shows a preview list of tasks (limited to 5 items)
