@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 46px;
+  color: var(--yellow);
+  letter-spacing: 0.5px;
+}
+
+.logo:hover {
+  color: var(--green);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.search {
+  background: var(--red);
+  color: white;
+}
+
+.search:hover {
+  background: #e5e7eb;
+  color: #0f172a;
+}
+
+.user {
+  background: var(--yellow);
+  color: #1f2937;
+}
+
+.user:hover {
+  background: #e5e7eb;
+}
+.settings {
+  background: var(--green);
+  color: #0f172a;
+}
+
+.settings:hover {
+  background: #e5e7eb;
+}

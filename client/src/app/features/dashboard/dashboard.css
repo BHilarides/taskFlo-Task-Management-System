@@ -1,0 +1,28 @@
+.dashboard {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 16px;
+}
+
+.projects,
+.actions {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.projects h3,
+.actions h3 {
+  margin-bottom: 22px;
+  font-size: 22px;
+  color: #111287
+}
