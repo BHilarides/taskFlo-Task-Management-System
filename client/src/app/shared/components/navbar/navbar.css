@@ -15,6 +15,10 @@
   letter-spacing: 0.5px;
 }
 
+.logo:hover {
+  color: var(--green);
+}
+
 .nav-actions {
   display: flex;
   align-items: center;

@@ -9,6 +9,6 @@ import { Navbar } from './shared/components/navbar/navbar'
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class App {
+export class AppComponent {
   protected readonly title = signal('taskFlo');
 }
