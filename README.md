@@ -7,3 +7,6 @@
   <li>Mariea Nies</li>
   <li>Ben Hilarides</li>
 </ul>
+
+<h3>Server: 'npm start' to run, 'npm test' to test</h3>
+<h3>Client: 'ng serve' to run, 'ng test' to test</h3>
