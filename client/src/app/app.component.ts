@@ -10,5 +10,5 @@ import { Navbar } from './shared/components/navbar/navbar'
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  protected readonly title = signal('taskFlo');
+  readonly title = signal('taskFlo');
 }

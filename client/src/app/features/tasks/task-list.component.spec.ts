@@ -9,7 +9,7 @@ describe('TaskListComponent', () => {
 
   const mockTaskService = {
     getTasks: () => of([
-      {_id: '1', title: 'Task One', completed: false }
+      {_id: '1', title: 'Task One', status: 'In Progress', priority: 'High', completed: false }
     ])
   };
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QuickActions } from './quick-actions';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('QuickActions', () => {
   let component: QuickActions;
@@ -8,7 +9,16 @@ describe('QuickActions', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QuickActions]
+      imports: [QuickActions],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+            queryParams: of({})
+          }
+        }
+      ]
     })
     .compileComponents();
 

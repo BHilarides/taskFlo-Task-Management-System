@@ -128,5 +128,83 @@ describe('Task API Tests', () => {
             expect(task).toHaveProperty('priority');
             expect(task).toHaveProperty('projectId');
         });
-    });     
+    });
+    
+    // Mariea's tests converted from TS
+    it('should return a 200 status', async () => {
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnThis(),
+                find: jest.fn().mockReturnThis(),
+                toArray: jest.fn().mockResolvedValue([
+                    {
+                        _id: '300000000000000000000001',
+                        title: 'Test Task',
+                        description: 'Test Description',
+                        status: 'Pending',
+                        priority: 'High',
+                        dateCreated: new Date(),
+                        dateModified: new Date(),
+                        projectId: '200000000000000000000001'  
+                    }
+                ])
+            };
+            await callback(db);
+        });
+
+        const res = await request(app).get('/api/tasks');
+        expect(res.status).toBe(200);
+    });
+
+    it('should return response body as object with data array', async () => {
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnThis(),
+                find: jest.fn().mockReturnThis(),
+                toArray: jest.fn().mockResolvedValue([
+                    {
+                        _id: '300000000000000000000001',
+                        title: 'Test Task',
+                        status: 'Pending',
+                        priority: 'Medium'
+                    }
+                ])
+            };
+            await callback(db);
+        });
+
+        const res = await request(app).get('/api/tasks');
+        expect(res.body.data).toBeDefined();
+        expect(Array.isArray(res.body.data)).toBe(true);
+    });
+
+    it('should return tasks from database', async () => {
+        const testTask = {
+            _id: '300000000000000000000001',
+            title: 'Test Task',
+            description: 'Created in test',
+            status: 'Pending',
+            priority: 'Medium',
+            dateCreated: new Date(),
+            dateModified: new Date(),
+            projectId: '200000000000000000000001'
+        };
+
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnThis(),
+                find: jest.fn().mockReturnThis(),
+                toArray: jest.fn().mockResolvedValue([testTask])
+            };
+            await callback(db);
+            
+        });
+
+        const res = await request(app).get('/api/tasks');
+            
+        expect(res.body.success).toBe(true);
+        expect(res.body.data).toBeDefined();
+        expect(res.body.data.length).toBeGreaterThan(0);
+        expect(res.body.data[0].title).toBe('Test Task');
+    });
 });
