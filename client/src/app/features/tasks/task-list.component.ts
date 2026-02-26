@@ -8,15 +8,36 @@ import { Task } from '../../core/services/task.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  expandedTaskId: string | null = null;
+
+   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.tasks = tasks;
     });
   }
+
+  toggleTask(taskId: string) {
+    this.expandedTaskId =
+      this.expandedTaskId === taskId ? null : taskId;
+  }
+
+  isExpanded(taskId: string): boolean {
+    return this.expandedTaskId === taskId;
+  }
+
+  getStatusClass(status?: string): string {
+    return status ? status.toLowerCase() : '';
+  }
+
+  getPriorityClass(priority?: string) {
+    return priority ? priority.toLowerCase() : '';
+  }
 }
+
