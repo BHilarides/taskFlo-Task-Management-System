@@ -305,4 +305,103 @@ describe('Task API Tests', () => {
             expect(savedTask.dateModified).toBeDefined();
         });
     });
+
+    // Tests for PATCH endpoint
+    describe('PATCH /api/tasks/:id - Update a task', () => {
+        it('should return a 200 status code when updating a task', async () => {
+            const taskId = '300000000000000000000001';
+            const updatedData = {
+                title: 'Updated Task Title',
+                status: 'Completed'
+            };
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        findOneAndUpdate: jest.fn().mockResolvedValue({
+                            value: {
+                                _id: taskId,
+                                title: 'Updated Task Title',
+                                status: 'Completed',
+                                priority: 'High',
+                                projectId: '200000000000000000000001'
+                            }
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            const response = await request(app)
+                .patch(`/api/tasks/${taskId}`)
+                .send(updatedData);
+
+            expect(response.status).toBe(200);
+        });
+
+        it('should return success response with updated task data', async () => {
+            const taskId = '300000000000000000000002';
+            const updatedData = {
+                title: 'Updated Title',
+                description: 'Updated Description',
+                status: 'In Progress',
+                priority: 'Medium'
+            };
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        findOneAndUpdate: jest.fn().mockResolvedValue({
+                            value: {
+                                _id: taskId,
+                                title: 'Updated Title',
+                                description: 'Updated Description',
+                                status: 'In Progress',
+                                priority: 'Medium',
+                                projectId: '200000000000000000000001',
+                                dateCreated: new Date('2026-02-15'),
+                                dateModified: new Date('2026-02-20'),
+                                projectId: '200000000000000000000001'
+                            }
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            const response = await request(app)
+                .patch(`/api/tasks/${taskId}`)
+                .send(updatedData);
+
+            expect(response.body.success).toBe(true);
+            expect(response.body.message).toBe('Task updated successfully');
+            expect(response.body.data).toBeDefined();
+            expect(response.body.data.title).toBe(updatedData.title);
+            expect(response.body.data.status).toBe(updatedData.status);
+        });
+
+        it('should return 404 if task to update is not found', async () => {
+            const taskId = '999999999999999999999999';
+            const updatedData = {
+                title: 'Non-existent Task'
+            };
+
+            mongo.mockImplementation(async (callback) => {
+                const db = {
+                    collection: jest.fn().mockReturnValue({
+                        findOneAndUpdate: jest.fn().mockResolvedValue({ value: null 
+                        })
+                    })
+                };
+                await callback(db);
+            });
+
+            const response = await request(app)
+                .patch(`/api/tasks/${taskId}`)
+                .send(updatedData);
+
+            expect(response.status).toBe(404);
+            expect(response.body.message).toBe('Task not found');
+        });
+    });
 });

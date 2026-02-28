@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -33,7 +34,7 @@ import { environment } from '../../../environments/environment';
           }
 
           @for (task of tasks; track task._id) {
-            <div class="task-card">
+            <div class="task-card" (click)="editTask(task._id)">
               <h3>{{ task.title }}</h3>
               <p>{{ task.description }}</p>
               <div class="task-meta">
@@ -77,6 +78,13 @@ import { environment } from '../../../environments/environment';
       padding: 20px;
       margin-bottom: 15px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .task-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 
     .task-card h3 {
@@ -111,7 +119,10 @@ export class TaskListComponent implements OnInit {
   loading: boolean = true;
   error: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -132,5 +143,9 @@ export class TaskListComponent implements OnInit {
         console.error('Error loading tasks:', err);
       }
     });
+  }
+
+  editTask(taskId: string): void {
+    this.router.navigate(['/tasks/edit', taskId])
   }
 }

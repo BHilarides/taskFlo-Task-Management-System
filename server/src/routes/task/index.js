@@ -33,6 +33,42 @@ router.get('/', async (req, res, next) => {
 });
 
 /**
+ * @route GET /api/tasks/:id
+ * @description GET a single task by ID
+ * @returns {Object} - JSON response with task data
+ */
+router.get('/:id', async (req, res, next) => {
+    try {
+        await mongo(async (db) => {
+            const { ObjectId } = require('mongodb');
+            const taskId = req.params.id;
+
+            const task = await db.collection('tasks').findOne({ 
+                _id: new ObjectId(taskId) 
+            });
+
+            console.log('Task found:', task);
+
+            if (!task) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Task not found'
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                data: task
+            });
+        }, next);
+    } catch (err) {
+        console.error('Error fetching task:', err);
+        next(err);
+    }
+});
+
+
+/**
  * @route POST /api/tasks
  * @description Create a new task
  * @returns {Object} - JSON response with the created task
@@ -66,6 +102,58 @@ router.post('/', async (req, res, next) => {
         }, next);
     } catch (err) {
         console.error('Error creating task:', err);
+        next(err);
+    }
+});
+
+// Adding PATCH route for edit functionality
+/**
+ * @route PATCH /api/tasks/:id
+ * @description Update an existing task
+ * @returns {Object} - JSON response with the updated task
+ */
+
+router.patch('/:id', async (req, res, next) => {
+    try {
+        await mongo(async (db) => {
+            const { ObjectId } = require('mongodb');
+            const taskId = req.params.id;
+
+            // Build the update object based on provided fields
+            const updateFields = {};
+            if (req.body.title !== undefined) updateFields.title = req.body.title;
+            if (req.body.description !== undefined) updateFields.description = req.body.description;
+            if (req.body.status !== undefined) updateFields.status = req.body.status;
+            if (req.body.priority !== undefined) updateFields.priority = req.body.priority;
+            if (req.body.projectId !== undefined) updateFields.projectId = req.body.projectId;
+            if (req.body.dueDate !== undefined) updateFields.dueDate = req.body.dueDate ? new Date(req.body.dueDate) : null;
+            updateFields.dateModified = new Date();
+
+            // Always update the dateModified field
+            updateFields.dateModified = new Date();
+
+            // Update the task in the database
+            const result = await db.collection('tasks').findOneAndUpdate(
+                { _id: new ObjectId(taskId) },
+                { $set: updateFields },
+                { returnDocument: 'after' }
+            );
+
+            if (!result.value) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Task not found'
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Task updated successfully',
+                data: result.value
+            });
+        }, next);
+    } catch (err) {
+        console.error('Error updating task:', err);
         next(err);
     }
 });
