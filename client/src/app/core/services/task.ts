@@ -14,7 +14,15 @@ export class TasksService {
     return this.http.get(this.baseUrl);
   }
 
+  getTaskById(id: string) {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
+
   createTask(task: any) {
     return this.http.post(this.baseUrl, task);
+  }
+
+  updateTask(id: string, task: any) {
+    return this.http.patch(`${this.baseUrl}/${id}`, task);
   }
 }
