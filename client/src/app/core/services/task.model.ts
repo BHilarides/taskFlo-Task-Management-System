@@ -6,4 +6,6 @@ export interface Task {
   title: string;
   status: TaskStatus;
   priority: TaskPriority;
+  description?: string;
+  subtasks?: string[];
 }
