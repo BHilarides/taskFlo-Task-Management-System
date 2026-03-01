@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
  */
 router.get('/:id', async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const taskId = req.params.id;
    
 
     // Validate ID format
@@ -90,7 +90,7 @@ router.post('/', async (req, res, next) => {
 
             // Create new task object
             const newTask = {
-                _id: new ObjectId().toString(),
+                _id: new ObjectId(),
                 title: req.body.title,
                 description: req.body.description || '',
                 status: req.body.status,

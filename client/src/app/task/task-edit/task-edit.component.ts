@@ -1,3 +1,10 @@
+/**
+ * Author: Ben Hilarides
+ * Date: 27 February 2026
+ * File: task-edit.component.ts
+ * Description: Component to edit tasks
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

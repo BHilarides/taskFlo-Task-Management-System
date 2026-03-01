@@ -16,7 +16,7 @@ export class TaskService {
 
   private mockTasks: Task[] = [
     {
-      _id: '1',
+      _id: '674a2b3c4d5e6f7a8b9c0d1e',
       title: 'Complete redesign of company website',
       status: 'In Progress',
       priority: 'High',
@@ -28,7 +28,7 @@ export class TaskService {
       ]
     },
     {
-      _id: '2',
+      _id: '674a2b3c4d5e6f7a8b9c0d1f',
       title: 'Create initial design mockups for new homepage layout',
       status: 'Pending',
       priority: 'Medium',
@@ -40,7 +40,7 @@ export class TaskService {
       ]
     },
       {
-      _id: '3',
+      _id: '674a2b3c4d5e6f7a8b9c0d1f',
       title: 'Develop and implement the new homepage UI',
       status: 'Completed',
       priority: 'Low',
