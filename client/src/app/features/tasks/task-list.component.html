@@ -27,6 +27,13 @@
         </span>
       </div>
 
+      <button
+        class="view-details-btn"
+        (click)="viewTask(task._id); $event.stopPropagation()"
+      >
+        View Task by ID
+      </button>
+
       <div class="task-details" *ngIf="isExpanded(task._id)">
         <p class="task-description">
 
@@ -45,4 +52,10 @@
       </div>
     </article>
   </section>
+
+  <footer class="app-footer">
+    <p>
+      TaskFlo 2026 * Organize smarter, work faster
+    </p>
+  </footer>
 </section>

@@ -8,6 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const { mongo } = require('../../utils/mongo');
+const { ObjectId } = require('mongodb');
 
 /**
  * @route GET /api/tasks
@@ -34,39 +35,48 @@ router.get('/', async (req, res, next) => {
 
 /**
  * @route GET /api/tasks/:id
- * @description GET a single task by ID
+ * @description Get a single task by ID
  * @returns {Object} - JSON response with task data
+ * @author: Mariea Nies
  */
 router.get('/:id', async (req, res, next) => {
     try {
-        await mongo(async (db) => {
-            const { ObjectId } = require('mongodb');
-            const taskId = req.params.id;
+        const { id } = req.params;
+   
 
+    // Validate ID format
+    const isValidId = /^[a-f\d]{24}$/i.test(taskId);
+    if(!isValidId) {
+        return res.status(400).json({
+            success:false,
+            message: 'Invalid task ID'
+        });
+    }
+
+    
+        await mongo(async (db) => {
             const task = await db.collection('tasks').findOne({ 
                 _id: new ObjectId(taskId) 
             });
 
-            console.log('Task found:', task);
-
             if (!task) {
                 return res.status(404).json({
-                    success: false,
+                    success:false,
                     message: 'Task not found'
-                });
-            }
+                })
+            }    
 
+            // Success
             res.status(200).json({
                 success: true,
                 data: task
             });
         }, next);
+
     } catch (err) {
-        console.error('Error fetching task:', err);
         next(err);
     }
 });
-
 
 /**
  * @route POST /api/tasks
@@ -105,12 +115,13 @@ router.post('/', async (req, res, next) => {
         next(err);
     }
 });
-
+  
 // Adding PATCH route for edit functionality
 /**
  * @route PATCH /api/tasks/:id
  * @description Update an existing task
- * @returns {Object} - JSON response with the updated task
+ * @returns {Object} - JSON response for updating task
+ * @author Ben Hilarides
  */
 
 router.patch('/:id', async (req, res, next) => {
@@ -157,5 +168,5 @@ router.patch('/:id', async (req, res, next) => {
         next(err);
     }
 });
-    
+
 module.exports = router;
