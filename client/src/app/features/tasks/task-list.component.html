@@ -34,6 +34,13 @@
         View Task by ID
       </button>
 
+      <button
+        class="edit-task-btn"
+        (click)="editTask(task._id); $event.stopPropagation()"
+      >
+        Edit Task
+      </button>
+
       <div class="task-details" *ngIf="isExpanded(task._id)">
         <p class="task-description">
 

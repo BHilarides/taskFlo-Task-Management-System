@@ -27,7 +27,7 @@ describe('Task API Tests', () => {
                     find: jest.fn().mockReturnThis(),
                     toArray: jest.fn().mockResolvedValue([
                         {
-                            _id: '300000000000000000000001',
+                            _id: '507f1f77bcf86cd799439011',
                             title: 'Design homepage mockups',
                             description: 'Create initial design mockups',
                             status: 'In Progress',
@@ -35,10 +35,10 @@ describe('Task API Tests', () => {
                             dueDate: new Date('2026-02-20'),
                             dateCreated: new Date('2026-01-15'),
                             dateModified: new Date('2026-02-18'),
-                            projectId: '200000000000000000000001'
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                         },
                         {
-                            _id: '300000000000000000000002',
+                            _id: '507f191e810c19729de860ea',
                             title: 'Review design mockups',
                             description: 'Present to stakeholders',
                             status: 'Pending',
@@ -46,7 +46,7 @@ describe('Task API Tests', () => {
                             dueDate: new Date('2026-02-25'),
                             dateCreated: new Date('2026-01-15'),
                             dateModified: new Date('2026-02-18'),
-                            projectId: '200000000000000000000001'
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                         }
                     ])
                 };
@@ -65,7 +65,7 @@ describe('Task API Tests', () => {
                     find: jest.fn().mockReturnThis(),
                     toArray: jest.fn().mockResolvedValue([
                         {
-                            _id: '300000000000000000000001',
+                            _id: '507f1f77bcf86cd799439011',
                             title: 'Test Task',
                             status: 'Pending',
                             priority: 'Medium'
@@ -88,7 +88,7 @@ describe('Task API Tests', () => {
                     find: jest.fn().mockReturnThis(),
                     toArray: jest.fn().mockResolvedValue([
                         {
-                            _id: '300000000000000000000001',
+                            _id: '507f1f77bcf86cd799439011',
                             title: 'Design homepage mockups',
                             description: 'Create initial design mockups',
                             status: 'In Progress',
@@ -96,10 +96,10 @@ describe('Task API Tests', () => {
                             dueDate: new Date('2026-02-20'),
                             dateCreated: new Date('2026-01-15'),
                             dateModified: new Date('2026-02-18'),
-                            projectId: '200000000000000000000001'
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                             },
                             {
-                            _id: '300000000000000000000002',
+                            _id: '507f191e810c19729de860ea',
                             title: 'Review design mockups',
                             description: 'Present to stakeholders',
                             status: 'Pending',
@@ -107,7 +107,7 @@ describe('Task API Tests', () => {
                             dueDate: new Date('2026-02-25'),
                             dateCreated: new Date('2026-01-15'),
                             dateModified: new Date('2026-02-18'),
-                            projectId: '200000000000000000000001'
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                         }
                     ])
                 };
@@ -138,14 +138,14 @@ describe('Task API Tests', () => {
                 find: jest.fn().mockReturnThis(),
                 toArray: jest.fn().mockResolvedValue([
                     {
-                        _id: '300000000000000000000001',
+                        _id: '507f191e810c19729de860ea',
                         title: 'Test Task',
                         description: 'Test Description',
                         status: 'Pending',
                         priority: 'High',
                         dateCreated: new Date(),
                         dateModified: new Date(),
-                        projectId: '200000000000000000000001'  
+                        projectId: '674a1b2c3d4e5f6a7b8c9d0e'  
                     }
                 ])
             };
@@ -163,7 +163,7 @@ describe('Task API Tests', () => {
                 find: jest.fn().mockReturnThis(),
                 toArray: jest.fn().mockResolvedValue([
                     {
-                        _id: '300000000000000000000001',
+                        _id: '507f1f77bcf86cd799439011',
                         title: 'Test Task',
                         status: 'Pending',
                         priority: 'Medium'
@@ -180,14 +180,14 @@ describe('Task API Tests', () => {
 
     it('should return tasks from database', async () => {
         const testTask = {
-            _id: '300000000000000000000001',
+            _id: '507f1f77bcf86cd799439011',
             title: 'Test Task',
             description: 'Created in test',
             status: 'Pending',
             priority: 'Medium',
             dateCreated: new Date(),
             dateModified: new Date(),
-            projectId: '200000000000000000000001'
+            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
         };
 
         mongo.mockImplementation(async (callback) => {
@@ -216,7 +216,7 @@ describe('POST /api/tasks - Create a new task', () => {
             description: 'Test Description',
             status: 'Pending',
             priority: 'High',
-            projectId: '200000000000000000000001',
+            projectId: '674a1b2c3d4e5f6a7b8c9d0e',
             dueDate: new Date('2026-02-28')
         };
 
@@ -224,7 +224,7 @@ describe('POST /api/tasks - Create a new task', () => {
             const db = {
                 collection: jest.fn().mockReturnValue({
                     insertOne: jest.fn().mockResolvedValue({
-                        insertedId: '300000000000000000000001' 
+                        insertedId: '507f1f77bcf86cd799439011' 
                     })
                 })
             };
@@ -244,7 +244,7 @@ describe('POST /api/tasks - Create a new task', () => {
             description: 'Implement new feature',
             status: 'In Progress',
             priority: 'Medium',
-            projectId: '200000000000000000000002',
+            projectId: '674a1b2c3d4e5f6a7b8c9d0f',
             dueDate: new Date('2026-03-15')
         };
 
@@ -252,7 +252,7 @@ describe('POST /api/tasks - Create a new task', () => {
             const db = {
                 collection: jest.fn().mockReturnValue({
                     insertOne: jest.fn().mockResolvedValue({
-                        insertedId: '300000000000000000000099'
+                        insertedId: '507f1f77bcf86cd799439011'
                     })
                 })
             };
@@ -274,7 +274,7 @@ describe('POST /api/tasks - Create a new task', () => {
             description: 'Write API docs',
             status: 'Pending',
             priority: 'Low',
-            projectId: '200000000000000000000003',
+            projectId: '674a1b2c3d4e5f6a7b8c9d10',
             dueDate: new Date('2026-03-30')
         };
 
@@ -313,7 +313,7 @@ describe('GET /api/tasks/:id - Read task by ID', () => {
 
     // Test 1: Successful fetch
     it('should return a task when given a valid ID', async () => {
-        const taskId = '300000000000000000000001';
+        const taskId = '507f1f77bcf86cd799439011';
 
         mongo.mockImplementation(async (callback)=> {
             const db = {
@@ -324,7 +324,7 @@ describe('GET /api/tasks/:id - Read task by ID', () => {
                     description: 'Test Description',
                     status: 'Pending',
                     priority: 'High',
-                    projectId: '200000000000000000000001'
+                    projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                 })
             };
             await callback(db);
@@ -334,7 +334,7 @@ describe('GET /api/tasks/:id - Read task by ID', () => {
         expect(res.status).toBe(200);
         expect(res.body.success).toBe(true);
         expect(res.body.data).toBeDefined();
-        expect(res.body.data._id).toBe(taskId);
+        expect(res.body.data._id).toBe(taskId)
     });
 
     // Test 2: Invalid Id format
@@ -347,7 +347,7 @@ describe('GET /api/tasks/:id - Read task by ID', () => {
 
     // Test 3: Task not found
     it('should return 404 when task is not found', async () => {
-        const taskId = '300000000000000000000099';
+        const taskId = '674a3b4c5d6e7f8a9b0c1d30';
 
         mongo.mockImplementation(async (callback)=> {
             const db ={
@@ -367,7 +367,7 @@ describe('GET /api/tasks/:id - Read task by ID', () => {
 // Tests for PATCH endpoint
 describe('PATCH /api/tasks/:id - Update a task', () => {
     it('should return a 200 status code when updating a task', async () => {
-        const taskId = '300000000000000000000001';
+        const taskId = '674a3b4c5d6e7f8a9b0c1d30';
         const updatedData = {
             title: 'Updated Task Title',
             status: 'Completed'
@@ -382,7 +382,7 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
                             title: 'Updated Task Title',
                             status: 'Completed',
                             priority: 'High',
-                            projectId: '200000000000000000000001'
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                         }
                     })
                 })
@@ -398,7 +398,7 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
     });
 
     it('should return success response with updated task data', async () => {
-        const taskId = '300000000000000000000002';            
+        const taskId = '507f191e810c19729de860ea';            
         const updatedData = {
             title: 'Updated Title',
             description: 'Updated Description',
@@ -416,10 +416,9 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
                             description: 'Updated Description',
                             status: 'In Progress',
                             priority: 'Medium',
-                            projectId: '200000000000000000000001',
+                            projectId: '674a1b2c3d4e5f6a7b8c9d0e',
                             dateCreated: new Date('2026-02-15'),
                             dateModified: new Date('2026-02-20'),
-                            projectId: '200000000000000000000001'
                         }
                     })
                 })

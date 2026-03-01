@@ -48,5 +48,9 @@ export class TaskListComponent implements OnInit {
     console.log('Navigating to task with ID:', taskId);
     this.router.navigate(['/tasks', taskId]);
   }
+
+  editTask(taskId: string): void {
+    this.router.navigate(['/tasks/edit', taskId]);
+  }
 }
 

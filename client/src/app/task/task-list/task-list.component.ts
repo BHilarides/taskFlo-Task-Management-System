@@ -7,46 +7,62 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { TasksService } from '../../core/services/task';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="task-list-container">
-      <h1>All Tasks</h1>
-
-      @if (loading) {
-        <div class="loading">Loading tasks...</div>
-      }
-
-      @if (error) {
-        <div class="error">{{ error }}</div>
-      }
-
-      @if (!loading && !error) {
-        <div class="tasks">
-          @if (tasks.length === 0) {
-            <p>No tasks found.</p>
-          }
-
-          @for (task of tasks; track task._id) {
-            <div class="task-card" (click)="editTask(task._id)">
-              <h3>{{ task.title }}</h3>
-              <p>{{ task.description }}</p>
-              <div class="task-meta">
-                <span class="status">{{ task.status }}</span>
-                <span class="priority">{{ task.priority }}</span>
-              </div>
-            </div>
-          }
-        </div>
-      }
+<section class="task-list-page">
+  <header class="task-list-header">
+    <div>
+      <h2>All Tasks</h2>
+      <p class="subtitle">Track progress and stay organized</p>
     </div>
-  `,
+  </header>
+
+  @if (loading) {
+    <div class="loading">Loading tasks...</div>
+  }
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (!loading && !error) {
+    <section class="task-grid">
+      @if (tasks.length === 0) {
+        <p>No tasks found.</p>
+      }
+
+      @for (task of tasks; track task._id) {
+        <article class="task-card" (click)="viewTask(task._id)">
+          <header class="task-header">
+            <h3>{{ task.title }}</h3>
+          </header>
+
+          <p class="task-description">{{ task.description }}</p>
+
+          <div class="task-meta">
+            <span class="status" [ngClass]="getStatusClass(task.status)">
+              {{ task.status }}
+            </span>
+            <span class="priority" [ngClass]="getPriorityClass(task.priority)">
+              {{ task.priority }} Priority
+            </span>
+          </div>
+        </article>
+      }
+    </section>
+  }
+
+  <footer class="app-footer">
+    <p>TaskFlo 2026 * Organize smarter, work faster</p>
+  </footer>
+</section>
+`,
   styles: [`
     .task-list-container {
       max-width: 1200px;
@@ -120,7 +136,7 @@ export class TaskListComponent implements OnInit {
   error: string = '';
 
   constructor(
-    private http: HttpClient,
+    private taskService: TasksService,
     private router: Router
   ) {}
 
@@ -129,15 +145,15 @@ export class TaskListComponent implements OnInit {
   }
 
   loadTasks(): void {
-    console.log('Neb component - API URL:', `${environment.apiBaseUrl}/tasks`);
+    console.log('Ben component - Loading tasks from API');
     this.loading = true;
-    this.http.get(`${environment.apiBaseUrl}/tasks`).subscribe({
+    this.taskService.getTasks().subscribe({
       next: (data: any) => {
         this.tasks = data.data;
         this.loading = false;
         console.log('Tasks loaded:', this.tasks);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.error = 'Failed to load tasks';
         this.loading = false;
         console.error('Error loading tasks:', err);
@@ -145,7 +161,15 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  editTask(taskId: string): void {
-    this.router.navigate(['/tasks/edit', taskId])
+  viewTask(taskId: string): void {
+    this.router.navigate(['/tasks', taskId])
+  }
+
+  getStatusClass(status: string): string {
+    return status.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  getPriorityClass(priority: string): string {
+    return priority.toLowerCase();
   }
 }

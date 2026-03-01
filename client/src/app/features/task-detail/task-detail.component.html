@@ -1,6 +1,6 @@
 <section class="task-detail-page" *ngIf="!loading && task;  else loadingState">
 
-  <button class="back-btn" routerLink="/tasks">
+  <button class="back-btn" routerLink="/all-tasks">
     <-- Back to Tasks
   </button>
 
@@ -43,12 +43,16 @@
     </ul>
   </section>
 
+  <div class="action-buttons">
+    <button class="btn-edit" (click)="editTask()">Edit Task</button>
+  </div>
+
   <footer class="app-footer">
     <p>
       TaskFlo 2026 * Organize smarter, work faster
     </p>
   </footer>
-  
+
 </section>
 
 <ng-template #noSubtasks>

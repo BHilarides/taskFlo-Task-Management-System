@@ -1,8 +1,8 @@
 import {Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { TaskService } from '../../core/services/task.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { TasksService } from '../../core/services/task'
 import { Task } from '../../core/services/task.model';
 
 @Component({
@@ -13,13 +13,15 @@ import { Task } from '../../core/services/task.model';
   styleUrls: ['./task-detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-  task!: Task;
+  task: any = null;
+  taskId: string = '';
   loading = true;
   error: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private taskService: TaskService
+    private router: Router,
+    private tasksService: TasksService
   ) {}
 
   ngOnInit(): void {
@@ -31,11 +33,13 @@ export class TaskDetailComponent implements OnInit {
       return;
     }
 
+    this.taskId = taskId
+
     console.log('Fetching task by ID:', taskId);
 
-    this.taskService.getTaskById(taskId).subscribe({
-      next: (task: Task) => {
-        this.task = task;
+    this.tasksService.getTaskById(taskId).subscribe({
+      next: (response: any) => {
+        this.task = response.data;
         this.loading = false;
       },
       error: () => {
@@ -43,5 +47,9 @@ export class TaskDetailComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  editTask(): void {
+    this.router.navigate(['/tasks/edit', this.taskId]);
   }
 }
