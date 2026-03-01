@@ -5,13 +5,15 @@ import { TaskListComponent } from './features/tasks/task-list.component';
 import { TaskListComponent as BenTaskList } from './task/task-list/task-list.component';
 import { TaskFormComponent } from './features/task-form/task-form.component';
 import { TaskEditComponent } from './task/task-edit/task-edit.component';
+import { TaskDetailComponent } from './features/task-detail/task-detail.component';
 
 export const routes: Routes = [
   { path: '', component: Dashboard },
   { path: 'tasks', component: TaskListComponent },
   { path: 'all-tasks', component: BenTaskList},
   { path: 'tasks/new', component: TaskFormComponent},
-  { path: 'tasks/edit/:id', component: TaskEditComponent }
+  { path: 'tasks/edit/:id', component: TaskEditComponent },
+  { path: 'tasks/:id', component: TaskDetailComponent}
 ];
 
 @NgModule({

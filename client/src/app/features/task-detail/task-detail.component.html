@@ -1,0 +1,70 @@
+<section class="task-detail-page" *ngIf="!loading && task;  else loadingState">
+
+  <button class="back-btn" routerLink="/tasks">
+    <-- Back to Tasks
+  </button>
+
+  <header class="task-detail-header">
+    <div>
+      <h2>{{ task.title}}</h2>
+
+      <p class="task-id">
+        <strong>Task ID</strong>
+        {{ task._id }}
+      </p>
+
+      <p class="subtitle"> Task details and progress overview</p>
+    </div>
+
+    <div class="task-meta">
+      <span class="status" [ngClass]="task.status.toLowerCase()">
+        {{ task.status }}
+      </span>
+      <span class="priority" [ngClass]="task.priority.toLowerCase()">
+        {{ task.priority }} Priority
+      </span>
+    </div>
+  </header>
+
+  <section class="task-card">
+    <h3>Description</h3>
+    <p class="description">
+      {{ task.description || 'No description provided for this task.' }}
+    </p>
+  </section>
+
+  <section class="task-card">
+    <h3>Subtasks</h3>
+
+    <ul *ngIf="task.subtasks?.length; else noSubtasks" class="subtask-list">
+      <li *ngFor="let subtask of task.subtasks">
+        {{ subtask }}
+      </li>
+    </ul>
+  </section>
+
+  <footer class="app-footer">
+    <p>
+      TaskFlo 2026 * Organize smarter, work faster
+    </p>
+  </footer>
+  
+</section>
+
+<ng-template #noSubtasks>
+  <div class="no-subtasks">
+    No Subtasks available.
+  </div>
+</ng-template>
+
+<ng-template #loadingState>
+  <div class="task-loading">
+    Loading task details...
+  </div>
+</ng-template>
+
+<div *ngIf="error" class="task-error">
+  {{ error }}
+</div>
+
+

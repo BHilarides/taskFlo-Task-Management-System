@@ -26,6 +26,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 6rem;
+  margin-bottom: 20rem;
 }
 
 .task-card {
@@ -48,6 +49,21 @@
 .task-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+.view-details-btn {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85;
+  border-radius: 6px;
+  border: none;
+  background-color: #4f46e5;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #4338ca;
+  }
 }
 
 .task-header {
@@ -147,4 +163,44 @@
 .priority.low {
   background: #e8f5e9;
   color: #2e7d32;
+}
+
+/* Footer */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.app-footer {
+  margin-top: auto;
+  padding: 1.75rem 0;
+  text-align: center;
+  background: #facc15;
+  border-top: 8px solid #1e3a8a;
+  color:#ef4444;
+  position: relative;
+}
+
+.app-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 6px;
+  background-color: #facc15;
+}
+
+.app-footer p {
+  font-size: 0.85rem;
+  color: #1565c0;
+  margin: 0;
+}
+
+.app-footer .brand {
+  font-weight: 700;
+  color: #ef6c00;
 }

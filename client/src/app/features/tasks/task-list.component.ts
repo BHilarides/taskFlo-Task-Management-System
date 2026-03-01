@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { TaskService } from '../../core/services/task.service';
 import { Task } from '../../core/services/task.model';
 
@@ -15,7 +16,10 @@ export class TaskListComponent implements OnInit {
 
   expandedTaskId: string | null = null;
 
-   constructor(private taskService: TaskService) {}
+   constructor(
+    private taskService: TaskService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
@@ -38,6 +42,11 @@ export class TaskListComponent implements OnInit {
 
   getPriorityClass(priority?: string) {
     return priority ? priority.toLowerCase() : '';
+  }
+
+  viewTask(taskId: string): void {
+    console.log('Navigating to task with ID:', taskId);
+    this.router.navigate(['/tasks', taskId]);
   }
 }
 

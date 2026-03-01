@@ -6,7 +6,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Task } from './task.model';
 
 
@@ -55,6 +55,16 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     return of(this.mockTasks);
+  }
+
+  getTaskById(id: string): Observable<Task> {
+    const task = this.mockTasks.find(t => t._id === id);
+
+    if (!task) {
+      return throwError(() => new Error('Task not found'));
+    }
+
+    return of(task);
   }
 }
 
