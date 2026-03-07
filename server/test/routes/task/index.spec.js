@@ -461,3 +461,69 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
         expect(response.body.message).toBe('Task not found');
     });
 });
+
+// Tests for delete endpoint BH 3/6/2026
+describe('DELETE /api/tasks/:id - Delete a task', () => {
+    it('should return a 200 status after successful deletion', async () => {
+        const taskId = '674a3b4c5d6e7f8a9b0c1d30';
+
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnValue({
+                    deleteOne: jest.fn().mockResolvedValue({
+                        deletedCount: 1
+                    })
+                })
+            };
+            await callback(db);
+        });
+
+        const response = await request(app)
+            .delete(`/api/tasks/${taskId}`);
+
+        expect(response.status).toBe(200);
+    });
+
+    it('should return success message upon deletion', async () => {
+        const taskId = '674a2b3c4d5e6f7a8b9c0d1f';
+
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnValue({
+                    deleteOne: jest.fn().mockResolvedValue({
+                        deletedCount: 1
+                    })
+                })
+            };
+            await callback(db);
+        });
+
+        const response = await request(app)
+            .delete(`/api/tasks/${taskId}`);
+
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe('Task Deleted Successfully');
+    });
+
+    it('should return 404 if task not found', async () => {
+        const taskId = '999999999999999999999999';
+
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnValue({
+                    deleteOne: jest.fn().mockResolvedValue({
+                        deletedCount: 0
+                    })
+                })
+            };
+            await callback(db);
+        });
+
+        const response = await request(app)
+            .delete(`/api/tasks/${taskId}`);
+
+        expect(response.status).toBe(404);
+        expect(response.body.success).toBe(false);
+        expect(response.body.message).toBe('Task not found, please try again');
+    });
+});

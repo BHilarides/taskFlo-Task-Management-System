@@ -25,4 +25,8 @@ export class TasksService {
   updateTask(id: string, task: any) {
     return this.http.patch(`${this.baseUrl}/${id}`, task);
   }
+
+  deleteTask(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }

@@ -169,4 +169,51 @@ router.patch('/:id', async (req, res, next) => {
     }
 });
 
+// Adding delete task route  BH 3-6-2026
+/**
+ * @route DELETE /api/tasks/:id
+ * @description Deletes a specified task
+ * @returns {Object} - JSON response for deleted task
+ * @author Ben Hilarides
+ */
+
+router.delete('/:id', async (req, res, next) => {
+    try {
+        await mongo(async (db) => {
+            const taskId = req.params.id;
+
+            // Validate ID format
+            const isValidId = /^[a-f\d]{24}$/i.test(taskId);
+            
+            if(!isValidId) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Invalid task ID'
+                });
+            }
+
+            // Delete the task
+            const result = await db.collection('tasks').deleteOne({
+                _id: new ObjectId(taskId)
+            });
+
+            // Confirm task found and deleted
+            if (result.deletedCount === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Task not found, please try again'
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Task Deleted Successfully'
+            });
+        }, next);
+    } catch (err) {
+        console.error('Error deleting task:', err);
+        next(err);
+    }
+});
+
 module.exports = router;
