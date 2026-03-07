@@ -23,6 +23,12 @@ import { TasksService } from '../../core/services/task';
     </div>
   </header>
 
+  @if (successMessage) {
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  }
+
   @if (loading) {
     <div class="loading">Loading tasks...</div>
   }
@@ -41,6 +47,15 @@ import { TasksService } from '../../core/services/task';
         <article class="task-card" (click)="viewTask(task._id)">
           <header class="task-header">
             <h3>{{ task.title }}</h3>
+            <div class="task-actions">
+              <button
+                class="icon-btn delete-btn"
+                (click)="deleteTask(task._id); $event.stopPropagation()"
+                title="Delete Task"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
           </header>
 
           <p class="task-description">{{ task.description }}</p>
@@ -87,6 +102,15 @@ import { TasksService } from '../../core/services/task';
       border-radius: 4px;
     }
 
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+    }
+
     .task-card {
       background: white;
       border: 1px solid #ddd;
@@ -101,6 +125,42 @@ import { TasksService } from '../../core/services/task';
     .task-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .task-header h3 {
+      margin: 0;
+      color: #34495e;
+      flex: 1;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      font-size: 16px;
+    }
+
+    .delete-btn {
+      color: #e74c3c;
+    }
+
+    .delete-btn:hover {
+      background-color: #ffebee;
     }
 
     .task-card h3 {
@@ -128,12 +188,14 @@ import { TasksService } from '../../core/services/task';
     .priority {
       background-color: #e74c3c;
     }
+
   `]
 })
 export class TaskListComponent implements OnInit {
   tasks: any[] = [];
   loading: boolean = true;
   error: string = '';
+  successMessage: string = '';
 
   constructor(
     private taskService: TasksService,
@@ -163,6 +225,33 @@ export class TaskListComponent implements OnInit {
 
   viewTask(taskId: string): void {
     this.router.navigate(['/tasks', taskId])
+  }
+
+  deleteTask(taskId: string): void {
+    if (!confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
+    this.taskService.deleteTask(taskId).subscribe({
+      next: () => {
+        console.log(`Task with ID ${taskId} deleted successfully`);
+        this.tasks = this.tasks.filter(t => t._id !== taskId);
+        this.successMessage = 'Task deleted successfully';
+        this.clearMessageAfterDelay();
+      },
+      error: (err: any) => {
+        console.error(`Error deleting task with ID ${taskId}:`, err);
+        this.error = `Error deleting task. Please try again later.`;
+        this.clearMessageAfterDelay();
+      }
+    });
+  }
+
+  private clearMessageAfterDelay(): void {
+    setTimeout(() => {
+      this.successMessage = '';
+      this.error = '';
+    }, 3000);
   }
 
   getStatusClass(status: string): string {
