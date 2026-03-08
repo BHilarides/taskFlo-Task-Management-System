@@ -33,6 +33,47 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+
+/**
+ * @route PATCH /api/tasks/search
+ * @description Search a task
+ * @returns {Object} - JSON response for search tasks
+ * @author Mariea Nies
+ */
+
+router.get('/search', async (req, res, next) => {
+    try {
+        const { q } = req.query;
+
+        if (!q) {
+            return res.status(400).json({
+                success:false,
+                message: 'Search query is required'
+            });
+        }
+
+        await mongo(async (db) => {
+            const tasks = await db.collection('tasks')
+            .find({
+                $or: [
+                    { title: { $regex: q, $options: 'i' } },
+                    { description: { $regex: q, $options: 'i' } }
+                ]
+            })
+            .toArray();
+
+          res.status(200).json({
+            success: true,
+            count: tasks.length,
+            data: tasks
+          });
+        }, next);
+
+    } catch (error) {
+        next(error);
+    }
+}); 
+
 /**
  * @route GET /api/tasks/:id
  * @description Get a single task by ID
@@ -115,6 +156,7 @@ router.post('/', async (req, res, next) => {
         next(err);
     }
 });
+ 
   
 // Adding PATCH route for edit functionality
 /**
@@ -138,7 +180,6 @@ router.patch('/:id', async (req, res, next) => {
             if (req.body.priority !== undefined) updateFields.priority = req.body.priority;
             if (req.body.projectId !== undefined) updateFields.projectId = req.body.projectId;
             if (req.body.dueDate !== undefined) updateFields.dueDate = req.body.dueDate ? new Date(req.body.dueDate) : null;
-            updateFields.dateModified = new Date();
 
             // Always update the dateModified field
             updateFields.dateModified = new Date();
