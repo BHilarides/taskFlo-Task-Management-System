@@ -307,6 +307,63 @@ describe('POST /api/tasks - Create a new task', () => {
     });
 });
 
+// Test task search 
+describe('GET /api/tasks/search - Search tasks', () => {
+    
+    it('should return 200 and matching tasks', async () => {
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnThis(),
+                find: jest.fn().mockReturnThis(),
+                toArray: jest.fn().mockResolvedValue([
+                    {
+                        _id: '507f1f77bcf86cd799439011',
+                        title: 'Search Match',
+                        description: 'Matching task',
+                        status: 'Pending',
+                        priority: 'High'
+                    }
+                ])
+            };
+            await callback(db);
+        });
+
+        const res = await request(app)
+            .get('/api/tasks/search?q=Search');
+
+        expect(res.status).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(res.body.data.length).toBe(1);
+    });
+
+    it('should return 400 if query is missing', async () => {
+        const res = await request(app)
+        .get('/api/tasks/search');
+
+        expect(res.status).toBe(400);
+        expect(res.body.success).toBe(false);
+        expect(res.body.message).toBe('Search query is required');
+    });
+
+    it('should return empty array when no matches found', async () => {
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnThis(),
+                find: jest.fn().mockReturnThis(),
+                toArray: jest.fn().mockResolvedValue([])
+            };
+            await callback(db);
+        });
+
+        const res = await request(app)
+        .get('/api/tasks/search?q=NoMatch');
+
+        expect(res.status).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(res.body.data.length).toBe(0);
+    });
+});
+
 // Test Task
 
 describe('GET /api/tasks/:id - Read task by ID', () => {
