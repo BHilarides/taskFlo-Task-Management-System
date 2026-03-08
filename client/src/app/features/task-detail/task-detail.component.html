@@ -5,26 +5,29 @@
   </button>
 
   <header class="task-detail-header">
-    <div>
+
+    <div class="header-left">
       <h2>{{ task.title}}</h2>
-
-      <p class="task-id">
-        <strong>Task ID</strong>
-        {{ task._id }}
-      </p>
-
-      <p class="subtitle"> Task details and progress overview</p>
+      <p class="subtitle">Task details and progress overview</p>
     </div>
 
     <div class="task-meta">
-      <span class="status" [ngClass]="task.status.toLowerCase()">
+      <span class="status" [ngClass]="task.status.toLowerCase().replace(' ', '-')">
         {{ task.status }}
       </span>
+
       <span class="priority" [ngClass]="task.priority.toLowerCase()">
         {{ task.priority }} Priority
       </span>
     </div>
   </header>
+
+  <section class="task-card">
+    <h3>Task Information</h3>
+    <p class="task-id">
+      <strong>Task ID:</strong> {{ task._id }}
+    </p>
+  </section>
 
   <section class="task-card">
     <h3>Description</h3>
