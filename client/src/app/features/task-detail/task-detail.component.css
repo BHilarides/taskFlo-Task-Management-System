@@ -1,8 +1,9 @@
 .task-detail-page {
   padding: 2.5rem 3rem;
   background-color: #f9fafb;
-  min-height: 100vh;
   padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -11,6 +12,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 2.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
 }
 
 .task-detail-header h2 {
@@ -34,7 +37,7 @@
 /* Meta Pills */
 .task-meta {
   display: flex;
-  gap: 0.75;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
@@ -58,7 +61,7 @@
   color: #ef6c00;
 }
 
-.status.in {
+.status.in-progress {
   background: #e3f2fd;
   color: #1565c0;
 }
@@ -86,14 +89,14 @@
   background: #ffffff;
   border-radius: 14px;
   padding: 1.75rem;
-  margin-bottom: 7.2rem;
+  margin-bottom: 1.5rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .task-card h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 0.75;
+  margin-bottom: 0.75rem;
   color: #111827;
 }
 
@@ -111,13 +114,20 @@
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 1rem;
+}
 
-  &:hover {
-    text-decoration: underline;
-  }
+back-btn:hover {
+  text-decoration: underline;
 }
 
 /* Subtasks */
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
 .subtask-list {
   padding-left: 1.2rem;
   list-style: disc;
@@ -136,7 +146,7 @@
 }
 
 /* Loading Error */
-.task.loading {
+.task-loading {
   padding: 3rem;
   text-align: center;
   color: #6b7280;
@@ -154,7 +164,7 @@
 
 /* Footer */
 .page-container {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
 }
@@ -162,7 +172,7 @@
 
 .app-footer {
   margin-top: auto;
-  padding: 1.75rem 0;
+  padding: 1.50rem 0;
   text-align: center;
   background: #facc15;
   border-top: 8px solid #1e3a8a;
@@ -177,7 +187,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 150px;
-  height: 6px;
+  height: 2px;
   background-color: #facc15;
 }
 

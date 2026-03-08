@@ -25,4 +25,11 @@ export class TasksService {
   updateTask(id: string, task: any) {
     return this.http.patch(`${this.baseUrl}/${id}`, task);
   }
+
+  searchTasks(query: string) {
+    return this.http.get<{ success: boolean; data: any[] }>(
+      `${this.baseUrl}/search?q=${query}`
+    );
+  }
+
 }

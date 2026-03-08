@@ -8,4 +8,7 @@ export interface Task {
   priority: TaskPriority;
   description?: string;
   subtasks?: string[];
+  dueDate?: Date;
+  dateCreated?: Date;
+  dateModified?: Date;
 }

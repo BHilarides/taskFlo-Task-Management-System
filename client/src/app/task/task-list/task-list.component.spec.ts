@@ -7,7 +7,8 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskListComponent } from './task-list.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {  HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from '../../../environments/environment';
 
 describe('TaskListComponent', () => {
@@ -80,7 +81,7 @@ describe('TaskListComponent', () => {
     fixture.detectChanges();
 
     const req = httpMock.expectOne(`${environment.apiBaseUrl}/tasks`);
-    req.error(new ProgressEvent('error'));
+    req.flush('Error', { status: 500, statusText: 'Server Error' });
 
     expect(component.error).toBe('Failed to load tasks');
     expect(component.loading).toBe(false);
