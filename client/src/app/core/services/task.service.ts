@@ -5,8 +5,6 @@
  * Will later connect to MongoDB-Backend API without changing components
  */
 
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { Task } from './task.model';
@@ -15,8 +13,6 @@ import { Task } from './task.model';
 @Injectable({ providedIn: 'root' })
 
 export class TaskService {
-
-  constructor(private http: HttpClient) {}
 
   private mockTasks: Task[] = [
     {

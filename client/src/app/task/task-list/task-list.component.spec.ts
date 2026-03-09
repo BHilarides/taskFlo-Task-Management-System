@@ -7,13 +7,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskListComponent } from './task-list.component';
-<<<<<<< HEAD
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TasksService } from '../../core/services/task';
-=======
-import {  HttpTestingController } from '@angular/common/http/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
->>>>>>> mariea/develop
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 
