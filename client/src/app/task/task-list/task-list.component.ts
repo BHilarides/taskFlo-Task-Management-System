@@ -78,11 +78,17 @@ import { TasksService } from '../../core/services/task';
   </footer>
 </section>
 `,
+
+/** Updated the task list component styles to match the TaskFlo branding and improved the layout
+ * using a 3x3 grid for task cards. Enhanced card styling with consistant spacing, shadows, and
+ * branded accent colors. -MN
+ */
   styles: [`
-    .task-list-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+
+    .task-list-page {
+      padding: 2.5rem 3rem;
+      background-color: #f9fafb;
+      min-height: 100vh;
     }
 
     h1 {
@@ -111,20 +117,27 @@ import { TasksService } from '../../core/services/task';
       border: 1px solid #c3e6cb;
     }
 
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
     .task-card {
       background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border-radius: 14px;
       padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      min-height: 180px;
+      boarder-top: 5px solid #1e3a8a;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s ease;
     }
 
     .task-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
     }
 
     .task-header {
@@ -136,8 +149,16 @@ import { TasksService } from '../../core/services/task';
 
     .task-header h3 {
       margin: 0;
-      color: #34495e;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
       flex: 1;
+    }
+
+    .task-description {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 12px;
     }
 
     .task-actions {
@@ -156,11 +177,11 @@ import { TasksService } from '../../core/services/task';
     }
 
     .delete-btn {
-      color: #e74c3c;
+      color: #ef4444;
     }
 
     .delete-btn:hover {
-      background-color: #ffebee;
+      background-color: #fee2e2;
     }
 
     .task-card h3 {
@@ -170,23 +191,46 @@ import { TasksService } from '../../core/services/task';
 
     .task-meta {
       display: flex;
-      gap: 15px;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     .task-meta span {
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
-    .status {
-      background-color: #3498db;
+    .status.completed {
+      background: #e6f4ea;
+      color: #2e7d32;
     }
 
-    .priority {
-      background-color: #e74c3c;
+     .status.pending {
+      background: #fff3e0;
+      color: #ef6c00;
+    }
+
+     .status.in-progress {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+     .priority.high {
+      background: #fdecea;
+      color: #c62828;
+    }
+
+     .priority.medium {
+      background: #fff8e1;
+      color: #f9a825;
+    }
+
+     .priority.low {
+      background: #e8f5e9;
+      color: #2e7d32;
     }
 
   `]
