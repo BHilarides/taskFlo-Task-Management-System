@@ -26,16 +26,13 @@ export class TasksService {
     return this.http.patch(`${this.baseUrl}/${id}`, task);
   }
 
-<<<<<<< HEAD
   deleteTask(id: string) {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-=======
   searchTasks(query: string) {
     return this.http.get<{ success: boolean; data: any[] }>(
       `${this.baseUrl}/search?q=${query}`
     );
   }
 
->>>>>>> mariea/develop
 }

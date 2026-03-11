@@ -7,6 +7,7 @@ import { TaskFormComponent } from './features/task-form/task-form.component';
 import { TaskEditComponent } from './task/task-edit/task-edit.component';
 import { TaskDetailComponent } from './features/task-detail/task-detail.component';
 import { TaskSearchComponent } from './task/task-search/task-search.component';
+import { ProjectCreateComponent } from './projects/project-create/project-create.component';
 
 export const routes: Routes = [
   { path: '', component: Dashboard },
@@ -15,7 +16,8 @@ export const routes: Routes = [
   { path: 'tasks/new', component: TaskFormComponent},
   { path: 'tasks/edit/:id', component: TaskEditComponent },
   { path: 'tasks/:id', component: TaskDetailComponent},
-  { path: 'task-search', component: TaskSearchComponent }
+  { path: 'task-search', component: TaskSearchComponent },
+  { path: 'projects/new', component: ProjectCreateComponent}
 ];
 
 @NgModule({
