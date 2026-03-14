@@ -5,7 +5,13 @@ import { environment } from "../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
+  private baseUrl = `${environment.apiBaseUrl}/projects`;
+
   constructor(private http: HttpClient) {}
+
+  getProjects() {
+    return this.http.get(this.baseUrl)
+  }
 
   createProject(project: any): Observable<any> {
     return this.http.post(
@@ -13,5 +19,5 @@ export class ProjectService {
       project
     );
   }
-  
+
 }

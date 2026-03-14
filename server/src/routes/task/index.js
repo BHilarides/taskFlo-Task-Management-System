@@ -33,9 +33,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
 /**
- * @route PATCH /api/tasks/search
+ * @route GET /api/tasks/search
  * @description Search a task
  * @returns {Object} - JSON response for search tasks
  * @author Mariea Nies

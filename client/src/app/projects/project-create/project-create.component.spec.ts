@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { ProjectCreateComponent } from './project-create.component';
 import { ProjectService } from '../../core/services/project.service';
 import { Router } from '@angular/router';
@@ -11,24 +11,23 @@ describe('ProjectCreateComponent', () => {
   let component: ProjectCreateComponent;
   let fixture: ComponentFixture<ProjectCreateComponent>;
   let mockProjectService: jasmine.SpyObj<ProjectService>;
-  let mockRouter: jasmine.SpyObj<Router>;
+  let router: Router;
 
   beforeEach(async () => {
 
     mockProjectService = jasmine.createSpyObj('ProjectService', ['createProject']);
-    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
 
     await TestBed.configureTestingModule({
-      imports: [ProjectCreateComponent],
+      imports: [ProjectCreateComponent, RouterTestingModule],
       providers: [
         { provide: ProjectService, useValue: mockProjectService },
-        { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectCreateComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -57,6 +56,8 @@ describe('ProjectCreateComponent', () => {
   // Test Three
   it('should navigate to dashboard after successful project creation', () => {
 
+    spyOn(router, 'navigate');
+
     mockProjectService.createProject.and.returnValue(of({}));
 
     component.project = {
@@ -68,7 +69,7 @@ describe('ProjectCreateComponent', () => {
 
     component.createProject();
 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
-  
+
 });
