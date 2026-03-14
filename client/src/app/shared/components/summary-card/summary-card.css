@@ -27,10 +27,10 @@
 }
 
 .week {
-  background: linear-gradient(135deg, #facc15, #eab308);
-  color: #1f2937;
+ background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
 }
 
 .overdue {
-  background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #1f2937;
 }

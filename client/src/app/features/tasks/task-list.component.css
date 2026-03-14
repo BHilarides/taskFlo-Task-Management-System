@@ -24,26 +24,22 @@
 
 .task-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 6rem;
-  margin-bottom: 20rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .task-card {
   background: #fff;
-  min-height: 260px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   border-radius: 14px;
   padding: 1.5rem;
+  border-top: 5px solid #1e3a8a;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.task-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.08);
 }
 
 .task-card:hover {
@@ -53,18 +49,19 @@
 
 .view-details-btn {
   margin-top: 0.75rem;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
   border-radius: 6px;
   border: none;
   background-color: #4f46e5;
   color: #fff;
   cursor: pointer;
-
-  &:hover {
-    background-color: #4338ca;
-  }
 }
+
+.view-details-btn:hover {
+    background-color: #172554;
+}
+
 
 .task-header {
   margin-bottom: 1.25rem;
@@ -75,6 +72,21 @@
   padding-top: 1rem;
   border-top: 1px solid #eee;
   animation: expandDown 0.25s ease-out;
+}
+
+.edit-task-btn {
+  margin-top: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #facc15;
+  color: #111827;
+  cursor: pointer;
+}
+
+.edit-task-btn:hover {
+  background-color: #eab308;
 }
 
 @keyframes expandDown {
@@ -102,7 +114,7 @@
 .subtask-list li {
   font-size: 0.85rem;
   color: #555;
-  margin-bottom: 0.35;
+  margin-bottom: 0.35rem;
 }
 
 .no-subtasks {
@@ -166,12 +178,6 @@
 }
 
 /* Footer */
-.page-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 
 .app-footer {
   margin-top: auto;

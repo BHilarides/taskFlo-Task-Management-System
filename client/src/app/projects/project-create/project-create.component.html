@@ -1,0 +1,71 @@
+<div class="project-page">
+
+    <button class="back-btn" routerLink="/">
+    <-- to Dashboard
+  </button>
+
+  <div class="project-card">
+
+    <h2>Create New Project</h2>
+   <p class="subtitle"> Add a new project to organize tasks and track progress</p>
+
+   <form (ngSubmit)="createProject()" #projectForm="ngForm">
+
+      <div class="form-group">
+       <label>Project Name</label>
+          <input
+            id="projectName"
+            type="text"
+            name="name"
+            [(ngModel)]="project.name"
+            required
+          placeholder="Enter project name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          id="projectDescription"
+          name="description"
+          [(ngModel)]="project.description"
+          rows="4"
+          placeholder="Describe the project"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Priority</label>
+        <select
+          id="projectPriority"
+          name="priority"
+          [(ngModel)]="project.priority"
+          required
+        >
+         <option value="">Select priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+         <option value="High">High</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Due Date</label>
+        <input
+          id="projectDueDate"
+          type="date"
+          name="dueDate"
+          [(ngModel)]="project.dueDate"
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" routerLink="/">Cancel</button>
+        <button type="submit" class="btn-submit" [disabled]="!projectForm.valid">Create Project</button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
