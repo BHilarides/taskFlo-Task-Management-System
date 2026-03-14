@@ -1,9 +1,15 @@
 .task-detail-page {
   padding: 2.5rem 3rem;
   background-color: #f9fafb;
-  padding-bottom: 3rem;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.task-detail-page > * {
+  width: 100%;
+  max-width: 900px;
 }
 
 /* Header */
@@ -11,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.8rem;
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 1rem;
 }
@@ -89,6 +95,7 @@
   background: #ffffff;
   border-radius: 14px;
   padding: 1.75rem;
+  border-top: 5px solid #1e3a8a;
   margin-bottom: 1.5rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
@@ -110,14 +117,32 @@
 .back-btn {
   background: none;
   border: none;
-  color: #4f46e5;
+  color: #1e3a8a;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 1rem;
 }
 
-back-btn:hover {
+.back-btn:hover {
   text-decoration: underline;
+}
+
+.actions-buttons {
+  margin-top: 1rem;
+}
+
+.btn-edit {
+  background: #facc15;
+  color: #111827;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  background: #eab308;
 }
 
 /* Subtasks */
@@ -171,34 +196,10 @@ back-btn:hover {
 
 
 .app-footer {
-  margin-top: auto;
-  padding: 1.50rem 0;
+  margin-top: 2rem;
+  padding: 1rem 0;
   text-align: center;
-  background: #facc15;
-  border-top: 8px solid #1e3a8a;
-  color:#ef4444;
-  position: relative;
+  color: #6b7280;
 }
 
-.app-footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 2px;
-  background-color: #facc15;
-}
-
-.app-footer p {
-  font-size: 0.85rem;
-  color: #1565c0;
-  margin: 0;
-}
-
-.app-footer .brand {
-  font-weight: 700;
-  color: #ef6c00;
-}
 

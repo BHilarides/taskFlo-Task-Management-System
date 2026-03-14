@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-recent-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './recent-projects.html',
   styleUrls: ['./recent-projects.css'],
 })
 export class RecentProjects {
   projects = [
-    { name: 'Project Alpha', progress: 'In Progress', percent: '60%' },
-    { name: 'Project Beta', progress: 'Pending', percent: '20%'},
-    { name: 'Project Gamma', progress: 'Completed', percent: '100%'}
+    { id: '674a2b3c4d5e6f7a8b9c0d1e', name: 'Design homepage mockups', progress: 'In Progress', percent: '60%' },
+    { id: '674a2b3c4d5e6f7a8b9c0d1f', name: 'Review design mockups with stakeholders', progress: 'Pending', percent: '20%'},
+    { id: '674a2b3c4d5e6f7a8b9c0d20', name: 'Design email templates for campaign', progress: 'Completed', percent: '100%'}
   ];
 }
 
