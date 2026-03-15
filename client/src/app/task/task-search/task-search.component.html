@@ -1,12 +1,19 @@
+   <button class="back-btn" routerLink="/">
+    <-- to Dashboard
+  </button>
+
+
 <div class="search-container">
   <h1>Search Tasks</h1>
 
   <div class="search-form">
     <input
+      id="taskSearch"
+      name="taskSearch"
       type="text"
       [(ngModel)]="query"
       (keyup.enter)="search()"
-      placeholder="Search by task title..."
+      placeholder="Search by task-id.."
       />
 
       <button (click)="search()">Search</button>

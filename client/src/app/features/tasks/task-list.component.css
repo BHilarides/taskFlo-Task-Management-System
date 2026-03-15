@@ -130,6 +130,12 @@
   color: #111827;
 }
 
+.project-id {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
 .task-meta {
   display: flex;
   margin-top: auto;

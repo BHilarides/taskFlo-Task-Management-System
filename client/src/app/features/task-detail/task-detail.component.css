@@ -145,6 +145,20 @@
   background: #eab308;
 }
 
+.back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
 /* Subtasks */
 
 .subtitle {

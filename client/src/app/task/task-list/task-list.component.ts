@@ -8,19 +8,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
-<section class="task-list-page">
+  <button class="back-btn" routerLink="/">
+    <-- to Dashboard
+  </button>
+
+  <section class="task-list-page">
   <header class="task-list-header">
     <div>
       <h2>All Tasks</h2>
       <p class="subtitle">Track progress and stay organized</p>
     </div>
+
   </header>
 
   @if (successMessage) {
@@ -59,6 +65,10 @@ import { TasksService } from '../../core/services/task';
           </header>
 
           <p class="task-description">{{ task.description }}</p>
+
+          <p class="task-id">
+            <strong>ID:</strong> {{ task._id }}
+          </p>
 
           <div class="task-meta">
             <span class="status" [ngClass]="getStatusClass(task.status)">
@@ -165,6 +175,20 @@ import { TasksService } from '../../core/services/task';
       display: flex;
       gap: 8px;
     }
+
+    .back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
 
     .icon-btn {
       background: none;

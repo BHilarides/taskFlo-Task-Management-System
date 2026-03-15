@@ -15,11 +15,12 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <section class="project-list-page">
 
-      <button class="back-btn" routerLink="/">
-        <-- to Dashboard
-      </button>
+    <button class="back-btn" routerLink="/">
+      <-- to Dashboard
+    </button>
+
+    <section class="project-list-page">
 
       <header class="project-list-header">
         <div>
@@ -156,6 +157,20 @@ import { Router, RouterModule } from '@angular/router';
       background: #e8f5e9;
       color: #2e7d32;
     }
+
+    .back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
 
     .app-footer {
       margin-top: 60px;

@@ -4,12 +4,13 @@ import { FormsModule } from "@angular/forms";
 import { TasksService } from "../../core/services/task";
 import { Task } from "../../core/services/task.model";
 import { Router } from "@angular/router";
+import { RouterModule } from "@angular/router";
 
 
 @Component({
   selector: 'app-task-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './task-search.component.html',
   styleUrls: ['./task-search.component.css']
 })
@@ -31,24 +32,32 @@ export class TaskSearchComponent implements OnInit {
 
 
     if (!this.query.trim()) {
-      this.error = 'Please enter a search term';
+      this.error = 'Please enter a Task ID';
       return;
     }
 
     this.tasksService.searchTasks(this.query).subscribe({
-      next: (response: { success: boolean; data: Task[]}) => {
-        console.log("Search results:", response);
-        this.results = response.data;
-        this.error = null;
+      next: (response: { success: boolean; data: Task[] })=> {
+        const task = response.data.find(t => t._id === this.query);
+
+        if (task) {
+          this.results = [task];
+          this.error = null;
+        } else {
+          this.results = [];
+          this.error = 'Task not found';
+        }
+
       },
       error: (err) => {
         console.error("Search error:", err);
+        this.results = [];
         this.error = 'Search failed';
       }
     });
   }
 
   goToTask(task: any) {
-    this.router.navigate(['/task-details', task._id]);
+    this.router.navigate(['/tasks', task._id]);
   }
 }
