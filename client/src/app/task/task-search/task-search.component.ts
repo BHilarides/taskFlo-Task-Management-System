@@ -38,18 +38,8 @@ export class TaskSearchComponent implements OnInit {
 
     this.tasksService.searchTasks(this.query).subscribe({
       next: (response: { success: boolean; data: Task[] })=> {
-        const task = response.data.find(t =>
-          t.title.toLowerCase().includes(this.query.toLowerCase())
-        );
-
-        if (task) {
-          this.results = [task];
-          this.error = null;
-        } else {
-          this.results = [];
-          this.error = 'Task not found';
-        }
-
+        this.results = response.data;
+        this.error = this.results.length === 0 ? 'No tasks found' : null;
       },
       error: (err) => {
         console.error("Search error:", err);
