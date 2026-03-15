@@ -18,7 +18,8 @@ export class ProjectCreateComponent {
     name: '',
     description: '',
     priority: '',
-    dueDate: ''
+    startDate: '',
+    endDate: ''
   };
 
   constructor(

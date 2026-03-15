@@ -10,17 +10,32 @@ app.use(express.json());
 app.use('/api/projects', projectRoutes);
 
 describe('Project API - Create Project', () => {
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+    })
     
     // Test One
     it ('should create a new project', async () => {
-        
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnValue({
+                    insertOne: jest.fn().mockResolvedValue({
+                        insertedId: '674a1b2c3d4e5f6a7b8c9d0e'
+                    })
+                })
+            };
+            await callback(db);
+        });
+
         const response = await request(app)
         .post('/api/projects')
         .send({
             name: 'Website Redesign',
             description: 'Update the company website',
             priority: 'High',
-            dueDate: '2026-04-01'
+            startDate: '2026-02-01',
+            endDate: '2026-04-01'
         });
 
         expect(response.status).toBe(201);
@@ -30,16 +45,29 @@ describe('Project API - Create Project', () => {
 
     // Test Two
     it('should return project data after creation', async () => {
+        mongo.mockImplementation(async (callback) => {
+            const db = {
+                collection: jest.fn().mockReturnValue({
+                    insertOne: jest.fn().mockResolvedValue({
+                        insertedId: '674a1b2c3d4e5f6a7b8c9d0f'
+                    })
+                })
+            };
+            await callback(db);
+        })
         
         const response = await request(app)
         .post('/api/projects')
         .send({
             name: 'Mobile App',
             description: 'Build a mobile version',
-            priority: 'Medium'
+            priority: 'Medium',
+            startDate: '2026-03-01',
+            endDate: '2026-06-01'
         });
 
         expect(response.body.data).toHaveProperty('id');
+        expect(response.body.data).toHaveProperty('projectId');
         expect(response.body.data.name).toBe('Mobile App');
     });
 
@@ -69,18 +97,25 @@ describe('Project API - List all Projects', () => {
         const mockProjects = [
             {
                 _id: '674a1b2c3d4e5f6a7b8c9d0e',
+                projectId: '674a1b2c3d4e5f6a7b8c9d0e',
                 name: 'TaskFlo Development',
                 description: 'Build task management system',
                 priority: 'High',
-                dueDate: '2026-04-01'
+                startDate: new Date('2026-02-01'),
+                endDate: new Date('2026-04-01'),
+                dateCreated: new Date('2026-02-01'),
+                dateModified: new Date('2026-03-01')
             },
             {
                 _id: '674a1b2c3d4e5f6a7b8c9d0f',
+                projectId: '674a1b2c3d4e5f6a7b8c9d0f',
                 name: 'Website Redesign',
                 description: 'Update header, footer, body',
                 priority: 'Medium',
-                dueDate: '2026-05-15'
-
+                startDate: new Date('2026-03-01'),
+                dueDate: new Date('2026-05-15'),
+                dateCreated: new Date('2026-02-28'),
+                dateModified: new Date('2026-03-02')
             }
         ];
 

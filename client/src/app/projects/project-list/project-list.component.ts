@@ -50,6 +50,11 @@ import { Router, RouterModule } from '@angular/router';
                 <span class="priority" [ngClass]="getPriorityClass(project.priority)">
                   {{ project.priority }} Priority
                 </span>
+                @if (project.startDate && project.endDate) {
+                  <span class="date-range">
+                    {{ project.startDate | date:'shortDate' }} - {{ project.endDate | date: 'shortDate' }}
+                  </span>
+                }
               </div>
             </article>
           }
@@ -164,6 +169,11 @@ import { Router, RouterModule } from '@angular/router';
       color: #7f8c8d;
       font-size: 14px;
       border-top: 1px solid #e1e8ed;
+    }
+
+    .date-range {
+      background: #e3f2fd;
+      color: #1565c0;
     }
   `]
 })

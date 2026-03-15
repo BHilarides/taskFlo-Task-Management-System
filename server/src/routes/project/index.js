@@ -38,13 +38,19 @@ router.post('/', async (req, res, next) => {
                     message: 'Project name is required'
                 });
             }
+
+            const newObjectId = new ObjectId();
     
             const project ={
-                id: new ObjectId(),
+                _id: newObjectId,
+                projectId: newObjectId.toString(),
                 name: req.body.name,
-                description: req.body.priority,
+                description: req.body.description,
                 priority: req.body.priority,
-                dueDate: req.body.dueDate
+                startDate: req.body.startDate ? new Date(req.body.startDate) : null,
+                endDate: req.body.endDate ? new Date(req.body.endDate) : null,
+                dateCreated: new Date(),
+                dateModified: new Date()
             };
 
             await db.collection('projects').insertOne(project);

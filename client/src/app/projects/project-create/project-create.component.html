@@ -50,12 +50,23 @@
       </div>
 
       <div class="form-group">
-        <label>Due Date</label>
+        <label>Start Date</label>
         <input
-          id="projectDueDate"
+          id="projectStartDate"
           type="date"
-          name="dueDate"
-          [(ngModel)]="project.dueDate"
+          name="startDate"
+          [(ngModel)]="project.startDate"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>End Date</label>
+        <input
+          id="projectEndDate"
+          type="date"
+          name="endDate"
+          [(ngModel)]="project.endDate"
         />
       </div>
 

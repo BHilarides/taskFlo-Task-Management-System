@@ -20,7 +20,7 @@ export class TaskService {
       title: 'Complete redesign of company website',
       status: 'In Progress',
       priority: 'High',
-      description: 'Update the entire company website to reflect the new brand identitiy, ensuring a modern look and consistant visual language across all pages.',
+      description: 'Update the entire company website to reflect the new brand identity, ensuring a modern look and consistent visual language across all pages.',
       subtasks: [
         'Audit existing website content and structure',
         'Define new brand color palette, typography, and visual guidelines',
@@ -32,12 +32,7 @@ export class TaskService {
       title: 'Create initial design mockups for new homepage layout',
       status: 'Pending',
       priority: 'Medium',
-      description: 'Design and presnt visual mockups for the new homepage that showcase layout, branding, and user experience before development begins.',
-      subtasks: [
-        'Sketch low-fidelity wireframes for homepage sections',
-        'Design high-fidelity mockups in Figma',
-        'Review mockups with stakeholders and gather feedback'
-      ]
+      description: 'Design and present visual mockups for the new homepage that showcase layout, branding, and user experience before development begins.',
     },
       {
       _id: '674a2b3c4d5e6f7a8b9c0d1f',
@@ -45,12 +40,7 @@ export class TaskService {
       status: 'Completed',
       priority: 'Low',
        description: 'Translate approved design mockups into a fully functional, responsive homepage using modern front-end best practices.',
-      subtasks: [
-        'Build responsive layout using approved designs',
-        'Implement branding styles(colors, fonts, components)',
-        'perform cross-browser and device testing'
-      ]
-    },
+    }
   ];
 
   getTasks(): Observable<Task[]> {

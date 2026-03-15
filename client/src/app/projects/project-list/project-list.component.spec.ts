@@ -8,6 +8,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectListComponent } from './project-list.component';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '../../../environments/environment';
 
 
@@ -37,7 +38,7 @@ describe('ProjectListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProjectListComponent, HttpClientTestingModule]
+      imports: [ProjectListComponent, HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
 
