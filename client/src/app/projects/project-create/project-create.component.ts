@@ -18,12 +18,8 @@ export class ProjectCreateComponent {
     name: '',
     description: '',
     priority: '',
-<<<<<<< HEAD
     startDate: '',
     endDate: ''
-=======
-    dueDate: ''
->>>>>>> mariea/develop
   };
 
   constructor(

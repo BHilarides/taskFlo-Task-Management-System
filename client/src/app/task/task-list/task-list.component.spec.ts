@@ -7,12 +7,8 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskListComponent } from './task-list.component';
-
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-<<<<<<< HEAD
-=======
-
->>>>>>> mariea/develop
+import { RouterTestingModule } from '@angular/router/testing';
 import { TasksService } from '../../core/services/task';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
@@ -21,7 +17,7 @@ describe('TaskListComponent', () => {
   let component: TaskListComponent;
   let fixture: ComponentFixture<TaskListComponent>;
   let httpMock: HttpTestingController;
-  let mockRouter: jasmine.SpyObj<Router>;
+  let router: Router;
 
   const mockTasks = [
     {
@@ -49,13 +45,9 @@ describe('TaskListComponent', () => {
   ];
 
   beforeEach(async () => {
-    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
-      imports: [TaskListComponent, HttpClientTestingModule],
-      providers: [
-        {provide: Router, useValue: mockRouter }
-      ]
+      imports: [TaskListComponent, HttpClientTestingModule, RouterTestingModule],
     })
     .compileComponents();
 

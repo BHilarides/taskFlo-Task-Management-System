@@ -32,13 +32,15 @@ export class TaskSearchComponent implements OnInit {
 
 
     if (!this.query.trim()) {
-      this.error = 'Please enter a Task ID';
+      this.error = 'Please enter a search term';
       return;
     }
 
     this.tasksService.searchTasks(this.query).subscribe({
       next: (response: { success: boolean; data: Task[] })=> {
-        const task = response.data.find(t => t._id === this.query);
+        const task = response.data.find(t =>
+          t.title.toLowerCase().includes(this.query.toLowerCase())
+        );
 
         if (task) {
           this.results = [task];

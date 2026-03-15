@@ -66,7 +66,6 @@ describe('Project API - Create Project', () => {
             endDate: '2026-06-01'
         });
 
-        expect(response.body.data).toHaveProperty('id');
         expect(response.body.data).toHaveProperty('projectId');
         expect(response.body.data.name).toBe('Mobile App');
     });

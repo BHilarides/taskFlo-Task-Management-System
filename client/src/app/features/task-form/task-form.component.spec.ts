@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TaskFormComponent } from './task-form.component';
 import { TasksService } from '../../core/services/task';
 import { Router } from '@angular/router';
@@ -16,10 +18,9 @@ describe('TaskFormComponent', () => {
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
-      imports: [TaskFormComponent],
+      imports: [TaskFormComponent, RouterTestingModule, HttpClientTestingModule],
       providers: [
-        { provide: TasksService, useValue: mockTasksService },
-        { provide: Router, useValue: mockRouter }
+        { provide: TasksService, useValue: mockTasksService }
       ]
     })
     .compileComponents();

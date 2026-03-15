@@ -434,13 +434,11 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
             const db = {
                 collection: jest.fn().mockReturnValue({
                     findOneAndUpdate: jest.fn().mockResolvedValue({
-                        value: {
-                            _id: taskId,
-                            title: 'Updated Task Title',
-                            status: 'Completed',
-                            priority: 'High',
-                            projectId: '674a1b2c3d4e5f6a7b8c9d0e'
-                        }
+                        _id: taskId,
+                        title: 'Updated Task Title',
+                        status: 'Completed',
+                        priority: 'High',
+                        projectId: '674a1b2c3d4e5f6a7b8c9d0e'
                     })
                 })
             };
@@ -467,16 +465,13 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
             const db = {
                 collection: jest.fn().mockReturnValue({
                     findOneAndUpdate: jest.fn().mockResolvedValue({
-                        value: {
-                            _id: taskId,
-                            title: 'Updated Title',
-                            description: 'Updated Description',
-                            status: 'In Progress',
-                            priority: 'Medium',
-                            projectId: '674a1b2c3d4e5f6a7b8c9d0e',
-                            dateCreated: new Date('2026-02-15'),
-                            dateModified: new Date('2026-02-20'),
-                        }
+                        _id: taskId,
+                        title: 'Updated Title',
+                        description: 'Updated Description',
+                        status: 'In Progress',
+                        priority: 'Medium',
+                        projectId: '674a1b2c3d4e5f6a7b8c9d0e',
+                        dateCreated: new Date('2026-02-15'),                            dateModified: new Date('2026-02-20'),
                     })
                 })
             };
@@ -503,8 +498,7 @@ describe('PATCH /api/tasks/:id - Update a task', () => {
         mongo.mockImplementation(async (callback) => {
             const db = {
                 collection: jest.fn().mockReturnValue({
-                    findOneAndUpdate: jest.fn().mockResolvedValue({ value: null 
-                    })
+                    findOneAndUpdate: jest.fn().mockResolvedValue(null)
                 })
             };
             await callback(db);

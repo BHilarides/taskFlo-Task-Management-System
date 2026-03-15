@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
+import { ProjectService } from '../../core/services/project.service';
 
 @Component({
   selector: 'app-task-form',
@@ -50,6 +51,7 @@ import { TasksService } from '../../core/services/task';
             [(ngModel)]="task.description"
             rows="4"
             placeholder="Enter task description"
+            required
           ></textarea>
         </div>
 
@@ -76,12 +78,12 @@ import { TasksService } from '../../core/services/task';
         </div>
 
         <div class="form-group">
-          <label for="projectId">Project ID</label>
+          <label for="projectId">Project</label>
           <select id="projectId" name="projectId" [(ngModel)]="task.projectId" required>
-            <option value="">Select project</option>
-            <option value="200000000000000000000001">Project 1</option>
-            <option value="200000000000000000000002">Project 2</option>
-            <option value="200000000000000000000003">Project 3</option>
+            <option value="">Select Project</option>
+            <option *ngFor="let project of projects" [value]="project.projectId">
+              {{ project.name }}
+            </option>
           </select>
         </div>
 
@@ -92,6 +94,7 @@ import { TasksService } from '../../core/services/task';
             id="dueDate"
             name="dueDate"
             [(ngModel)]="task.dueDate"
+            required
           />
         </div>
 
@@ -229,7 +232,9 @@ import { TasksService } from '../../core/services/task';
     }
   `]
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit {
+  projects: any[] = [];
+
   task = {
     title: '',
     description: '',
@@ -245,8 +250,22 @@ export class TaskFormComponent {
 
   constructor(
     private tasksService: TasksService,
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService
   ) {}
+
+  ngOnInit(): void {
+    // Load projects from database
+    this.projectService.getProjects().subscribe({
+      next: (response: any) => {
+        this.projects = response.data;
+      },
+      error: (err: any) => {
+        console.error('Error loading projects:', err);
+        this.errorMessage = 'Failed to load projects';
+      }
+    })
+  }
 
   onSubmit() {
     this.submitting = true;

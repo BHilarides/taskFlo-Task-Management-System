@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { of, throwError } from 'rxjs';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { TaskSearchComponent } from "./task-search.component";
 import { TasksService } from "../../core/services/task";
 import { Task } from "../../core/services/task.model";
@@ -31,7 +31,7 @@ describe('TaskSearchComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [TaskSearchComponent, HttpClientTestingModule],
+      imports: [TaskSearchComponent, HttpClientTestingModule, RouterTestingModule],
       providers: [
         { provide: TasksService, useValue: mockTasksService }
       ]
@@ -47,7 +47,7 @@ describe('TaskSearchComponent', () => {
 
   // Test 1: Succesful search
   it('should call service and return results when query is valid', () => {
-    component.query = 'match';
+    component.query = 'Test';
 
     mockTasksService.searchTasks.and.returnValue(
       of({ success: true, data: mockResults })
@@ -56,7 +56,7 @@ describe('TaskSearchComponent', () => {
     component.search();
     fixture.detectChanges();
 
-    expect(mockTasksService.searchTasks).toHaveBeenCalledWith('match');
+    expect(mockTasksService.searchTasks).toHaveBeenCalledWith('Test');
     expect(component.results.length).toBe(1);
     expect(component.results).toEqual(mockResults);
     expect(component.error).toBeNull();

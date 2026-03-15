@@ -27,6 +27,9 @@
     <p class="task-id">
       <strong>Task ID:</strong> {{ task._id }}
     </p>
+    <p class="task-due-date">
+      <strong>Due Date:</strong> {{ task.dueDate | date: 'fullDate' }}
+    </p>
   </section>
 
   <section class="task-card">
@@ -37,17 +40,31 @@
   </section>
 
   <section class="task-card">
-    <h3>Subtasks</h3>
+    <h3>Project Information</h3>
+    <p class="project-id">
+      <strong>Project ID:</strong> {{ task.projectId || 'Not assigned' }}
+    </p>
+  </section>
 
-    <ul *ngIf="task.subtasks?.length; else noSubtasks" class="subtask-list">
-      <li *ngFor="let subtask of task.subtasks">
-        {{ subtask }}
+  <section class="task-card">
+    <h3>Recent Modifications</h3>
+    <ul *ngIf="task.modificationLog?.length; else noModifications" class="modification-list">
+      <li *ngFor="let mod of task.modificationLog">
+        <span class="mod-timestamp">{{ mod.timestamp | date: 'short' }}</span>
+        <span class="mod-message">{{ mod.message }}</span>
       </li>
     </ul>
   </section>
 
+  <ng-template #noModifications>
+    <div class="no-modifications">
+      No recent modifications
+    </div>
+  </ng-template>
+
   <div class="action-buttons">
     <button class="btn-edit" (click)="editTask()">Edit Task</button>
+    <button class="btn-delete" (click)="deleteTask()">Delete Task</button>
   </div>
 
   <footer class="app-footer">

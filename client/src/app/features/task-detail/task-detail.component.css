@@ -107,10 +107,61 @@
   color: #111827;
 }
 
+/* Modifications */
+.modification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modification-list li {
+  padding: 8px 0;
+  border-bottom: 1px sold #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modification-list li:last-child {
+  border-bottom: none;
+}
+
+.mod-timestamp {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.mod-message {
+  color: #374151;
+  font-weight: 500;
+}
+
+.no-modifications {
+  color: #9ca3af;
+  font-style: italic;
+  padding: 16px 0;
+}
+
+.project-id {
+  margin: 0;
+}
+
 .description {
   font-size: 0.95rem;
   color: #4b5563;
   line-height: 1.5;
+}
+
+.task-id {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.task-due-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 8px;
 }
 
 /* Button */
@@ -128,7 +179,9 @@
 }
 
 .actions-buttons {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .btn-edit {
@@ -159,29 +212,22 @@
   text-decoration: underline;
 }
 
-/* Subtasks */
-
-.subtitle {
-  font-size: 0.95rem;
-  color: #6b7280;
-  margin-top: 4px;
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.subtask-list {
-  padding-left: 1.2rem;
-  list-style: disc;
+btn-delete:hover {
+  background: #ef4444;
 }
 
-.subtask-list li {
-  font-size: 0.9rem;
-  color: #374151;
-  margin-bottom: 0.4rem;
-}
-
-.empty-state {
-  font-size: 0.85rem;
-  color: #9ca3af;
-  font-style: italic;
+.btn-delete:active {
+  background-color: #b91c1c;
 }
 
 /* Loading Error */

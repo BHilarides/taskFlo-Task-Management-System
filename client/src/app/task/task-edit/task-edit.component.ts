@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
+import { ProjectService } from '../../core/services/project.service';
 
 @Component({
   selector: 'app-task-edit',
@@ -64,6 +65,7 @@ import { TasksService } from '../../core/services/task';
               [(ngModel)]="task.description"
               rows="4"
               placeholder="Enter task description"
+              required
             ></textarea>
           </div>
 
@@ -90,12 +92,12 @@ import { TasksService } from '../../core/services/task';
           </div>
 
           <div class="form-group">
-            <label for="projectId">Project ID</label>
+            <label for="projectId">Project</label>
             <select id="projectId" name="projectId" [(ngModel)]="task.projectId" required>
-                <option value="">Select project</option>
-                <option value="200000000000000000000001">Project 1</option>
-                <option value="200000000000000000000002">Project 2</option>
-                <option value="200000000000000000000003">Project 3</option>
+              <option value="">Select project</option>
+              <option *ngFor="let project of projects" [value]="project.projectId">
+                {{ project.name }}
+              </option>
             </select>
           </div>
 
@@ -251,6 +253,8 @@ import { TasksService } from '../../core/services/task';
   `]
 })
 export class TaskEditComponent implements OnInit {
+  projects: any[] = [];
+
   task: any = {
     _id: '',
     title: '',
@@ -270,11 +274,23 @@ export class TaskEditComponent implements OnInit {
   constructor(
     private tasksService: TasksService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
     this.taskId = this.route.snapshot.paramMap.get('id') || '';
+
+    // Load projects
+    this.projectService.getProjects().subscribe({
+      next: (response: any) => {
+        this.projects = response.data;
+      },
+      error: (err: any) => {
+        console.error('Error laoding projects:', err);
+      }
+    });
+
     if (this.taskId) {
       this.loadTask();
     }

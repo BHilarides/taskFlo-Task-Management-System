@@ -6,6 +6,7 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TaskEditComponent } from './task-edit.component';
 import { TasksService } from '../../core/services/task';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,7 +43,7 @@ describe('TaskEditComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [TaskEditComponent],
+      imports: [TaskEditComponent, HttpClientTestingModule],
       providers: [
         { provide: TasksService, useValue: mockTasksService },
         { provide: Router, useValue: mockRouter },

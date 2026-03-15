@@ -171,6 +171,19 @@ router.patch('/:id', async (req, res, next) => {
             const { ObjectId } = require('mongodb');
             const taskId = req.params.id;
 
+            // Adding troubleshooting for editing tasks
+            console.log('PATCH request received');
+            console.log('Task ID:', taskId);
+            console.log('Request body:', req.body);
+
+            const isValidId = /^[a-f\d]{24}$/i.test(taskId);
+            if (!isValidId) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Invalid task ID'
+                });
+            }
+
             // Build the update object based on provided fields
             const updateFields = {};
             if (req.body.title !== undefined) updateFields.title = req.body.title;
@@ -183,14 +196,28 @@ router.patch('/:id', async (req, res, next) => {
             // Always update the dateModified field
             updateFields.dateModified = new Date();
 
+            // Track modifications in log
+            const modificationEntry = {
+                timestamp: new Date(),
+                message: 'Task Updated'
+            };
+
             // Update the task in the database
             const result = await db.collection('tasks').findOneAndUpdate(
                 { _id: new ObjectId(taskId) },
-                { $set: updateFields },
+                { 
+                    $set: updateFields,
+                    $push: {
+                        modificationLog: {
+                            $each: [modificationEntry],
+                            $slice: -3  // Keep only the last 3
+                        }
+                    }
+                },
                 { returnDocument: 'after' }
             );
 
-            if (!result.value) {
+            if (!result) {
                 return res.status(404).json({
                     success: false,
                     message: 'Task not found'
@@ -200,7 +227,7 @@ router.patch('/:id', async (req, res, next) => {
             res.status(200).json({
                 success: true,
                 message: 'Task updated successfully',
-                data: result.value
+                data: result
             });
         }, next);
     } catch (err) {

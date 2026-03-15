@@ -52,4 +52,21 @@ export class TaskDetailComponent implements OnInit {
   editTask(): void {
     this.router.navigate(['/tasks/edit', this.taskId]);
   }
+
+  deleteTask(): void {
+    if (!confirm('Are you sure you want to delete this task? This action cannot be undone.')) {
+      return;
+    }
+
+    this.tasksService.deleteTask(this.taskId).subscribe({
+      next: () => {
+        console.log(`Task ${this.taskId} deleted successfully`);
+        this.router.navigate(['/all-tasks']);
+      },
+      error: (err: any) => {
+        console.error('Error deleting task:', err);
+        this.error = 'Failed to delete task. Please try again.';
+      }
+    })
+  }
 }

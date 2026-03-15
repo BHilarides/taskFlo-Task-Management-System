@@ -7,11 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-<<<<<<< HEAD
-=======
-import { RouterModule } from '@angular/router';
->>>>>>> mariea/develop
+import { Router, RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
 
 @Component({
@@ -19,24 +15,16 @@ import { TasksService } from '../../core/services/task';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-<<<<<<< HEAD
-<section class="task-list-page">
-=======
   <button class="back-btn" routerLink="/">
     <-- to Dashboard
   </button>
 
   <section class="task-list-page">
->>>>>>> mariea/develop
   <header class="task-list-header">
     <div>
       <h2>All Tasks</h2>
       <p class="subtitle">Track progress and stay organized</p>
     </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> mariea/develop
   </header>
 
   @if (successMessage) {
@@ -76,13 +64,10 @@ import { TasksService } from '../../core/services/task';
 
           <p class="task-description">{{ task.description }}</p>
 
-<<<<<<< HEAD
-=======
-          <p class="task-id">
-            <strong>ID:</strong> {{ task._id }}
+          <p class="task-due-date" *ngIf="task.dueDate">
+            <strong>Due:</strong> {{ task.dueDate | date: 'shortDate' }}
           </p>
 
->>>>>>> mariea/develop
           <div class="task-meta">
             <span class="status" [ngClass]="getStatusClass(task.status)">
               {{ task.status }}
@@ -103,7 +88,7 @@ import { TasksService } from '../../core/services/task';
 `,
 
 /** Updated the task list component styles to match the TaskFlo branding and improved the layout
- * using a 3x3 grid for task cards. Enhanced card styling with consistant spacing, shadows, and
+ * using a 3x3 grid for task cards. Enhanced card styling with consistent spacing, shadows, and
  * branded accent colors. -MN
  */
   styles: [`
@@ -184,28 +169,17 @@ import { TasksService } from '../../core/services/task';
       margin-bottom: 12px;
     }
 
+    .task-due-date {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
     .task-actions {
       display: flex;
       gap: 8px;
     }
 
-<<<<<<< HEAD
-=======
-    .back-btn {
-  align-self: flex-start;
-  background: none;
-  border: none;
-  color: #1e3a8a;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-}
-
-.back-btn:hover {
-  text-decoration: underline;
-}
-
->>>>>>> mariea/develop
     .icon-btn {
       background: none;
       border: none;
