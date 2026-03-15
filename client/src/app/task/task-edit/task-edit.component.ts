@@ -9,13 +9,20 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
 
 @Component({
   selector: 'app-task-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   template: `
+
+     <button class="back-btn" routerLink="/">
+      <-- to Dashboard
+    </button>
+
+
     <div class="task-edit-container">
       <h1>Edit Task</h1>
 
@@ -227,6 +234,20 @@ import { TasksService } from '../../core/services/task';
       background-color: #bdc3c7;
       cursor: not-allowed;
     }
+
+       .back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
   `]
 })
 export class TaskEditComponent implements OnInit {

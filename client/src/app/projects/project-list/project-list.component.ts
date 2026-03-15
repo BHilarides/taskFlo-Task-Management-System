@@ -15,11 +15,20 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
+<<<<<<< HEAD
     <section class="project-list-page">
 
       <button class="back-btn" routerLink="/">
         <-- to Dashboard
       </button>
+=======
+
+    <button class="back-btn" routerLink="/">
+      <-- to Dashboard
+    </button>
+
+    <section class="project-list-page">
+>>>>>>> mariea/develop
 
       <header class="project-list-header">
         <div>
@@ -50,11 +59,14 @@ import { Router, RouterModule } from '@angular/router';
                 <span class="priority" [ngClass]="getPriorityClass(project.priority)">
                   {{ project.priority }} Priority
                 </span>
+<<<<<<< HEAD
                 @if (project.startDate && project.endDate) {
                   <span class="date-range">
                     {{ project.startDate | date:'shortDate' }} - {{ project.endDate | date: 'shortDate' }}
                   </span>
                 }
+=======
+>>>>>>> mariea/develop
               </div>
             </article>
           }
@@ -162,6 +174,23 @@ import { Router, RouterModule } from '@angular/router';
       color: #2e7d32;
     }
 
+<<<<<<< HEAD
+=======
+    .back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+>>>>>>> mariea/develop
     .app-footer {
       margin-top: 60px;
       padding: 20px;
@@ -170,11 +199,14 @@ import { Router, RouterModule } from '@angular/router';
       font-size: 14px;
       border-top: 1px solid #e1e8ed;
     }
+<<<<<<< HEAD
 
     .date-range {
       background: #e3f2fd;
       color: #1565c0;
     }
+=======
+>>>>>>> mariea/develop
   `]
 })
 export class ProjectListComponent implements OnInit{

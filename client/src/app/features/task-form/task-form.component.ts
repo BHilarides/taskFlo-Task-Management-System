@@ -2,14 +2,20 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TasksService } from '../../core/services/task';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   template: `
+   <button class="back-btn" routerLink="/">
+    <-- to Dashboard
+  </button>
+
     <div class="task-form-container">
+
       <h1>Create New Task</h1>
 
       @if (successMessage) {
@@ -206,6 +212,20 @@ import { TasksService } from '../../core/services/task';
     .btn-submit:disabled {
       background-color: #007bff;
       cursor: not-allowed;
+    }
+
+    .back-btn {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+     cursor: pointer;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
     }
   `]
 })

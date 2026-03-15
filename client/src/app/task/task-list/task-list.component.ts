@@ -8,19 +8,35 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+<<<<<<< HEAD
+=======
+import { RouterModule } from '@angular/router';
+>>>>>>> mariea/develop
 import { TasksService } from '../../core/services/task';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
+<<<<<<< HEAD
 <section class="task-list-page">
+=======
+  <button class="back-btn" routerLink="/">
+    <-- to Dashboard
+  </button>
+
+  <section class="task-list-page">
+>>>>>>> mariea/develop
   <header class="task-list-header">
     <div>
       <h2>All Tasks</h2>
       <p class="subtitle">Track progress and stay organized</p>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> mariea/develop
   </header>
 
   @if (successMessage) {
@@ -60,6 +76,13 @@ import { TasksService } from '../../core/services/task';
 
           <p class="task-description">{{ task.description }}</p>
 
+<<<<<<< HEAD
+=======
+          <p class="task-id">
+            <strong>ID:</strong> {{ task._id }}
+          </p>
+
+>>>>>>> mariea/develop
           <div class="task-meta">
             <span class="status" [ngClass]="getStatusClass(task.status)">
               {{ task.status }}
@@ -166,6 +189,23 @@ import { TasksService } from '../../core/services/task';
       gap: 8px;
     }
 
+<<<<<<< HEAD
+=======
+    .back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+>>>>>>> mariea/develop
     .icon-btn {
       background: none;
       border: none;

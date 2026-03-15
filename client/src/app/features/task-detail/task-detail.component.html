@@ -1,8 +1,8 @@
-<section class="task-detail-page" *ngIf="!loading && task;  else loadingState">
+<button class="back-btn" routerLink="/all-tasks">
+  <-- Back to Tasks
+</button>
 
-  <button class="back-btn" routerLink="/all-tasks">
-    <-- Back to Tasks
-  </button>
+<section class="task-detail-page" *ngIf="!loading && task;  else loadingState">
 
   <header class="task-detail-header">
 

@@ -45,8 +45,12 @@ describe('ProjectCreateComponent', () => {
       name: 'Test Project',
       description: 'Testing project creation',
       priority: 'High',
+<<<<<<< HEAD
       startDate: '2026-02-01',
       endDate: '2026-04-01'
+=======
+      dueDate: '2026-04-01'
+>>>>>>> mariea/develop
     };
 
     component.createProject();
@@ -65,8 +69,12 @@ describe('ProjectCreateComponent', () => {
       name: 'Navigation Test',
       description: 'Testing redirect',
       priority: 'Low',
+<<<<<<< HEAD
       startDate: '',
       endDate: ''
+=======
+      dueDate: ''
+>>>>>>> mariea/develop
     };
 
     component.createProject();

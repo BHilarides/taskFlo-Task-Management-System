@@ -59,7 +59,8 @@ export class TaskService {
 
   searchTasks(query: string): Observable<{ success: boolean; data: Task[] }>  {
 
-    const filteredTasks = this.mockTasks.filter(task=>
+    const filteredTasks = this.mockTasks.filter(task =>
+      task._id.includes(query) ||
       task.title.toLowerCase().includes(query.toLowerCase())
     );
 
