@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Routing configuration
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/api/projects', projectRouter);
 
@@ -46,7 +46,10 @@ app.use('/api/projects', projectRouter);
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Catch-all route for Angular routing
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
