@@ -46,12 +46,17 @@ app.use('/api/projects', projectRouter);
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Catch-all route for Angular routing
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    return next();
-  }
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+app.get('/tasks*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+app.get('/projects*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+})
 
 // Use the error handling middleware
 app.use(notFoundHandler);
