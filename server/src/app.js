@@ -43,11 +43,11 @@ app.use('/api/tasks', taskRouter);
 app.use('/api/projects', projectRouter);
 
 // Serve Angular static files
-app.use(express.static(path.join(__dirname, '../../client/dist/tms-client/browser')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Catch-all route for Angular routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/dist/tms-client/browser/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Use the error handling middleware
