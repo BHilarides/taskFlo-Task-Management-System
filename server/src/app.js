@@ -7,6 +7,7 @@
  */
 
 // require statements
+const path = require('path');
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
@@ -40,6 +41,14 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/api/projects', projectRouter);
+
+// Serve Angular static files
+app.use(express.static(path.join(__dirname, '../../client/dist/tms-client/browser')));
+
+// Catch-all route for Angular routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/tms-client/browser/index.html'));
+});
 
 // Use the error handling middleware
 app.use(notFoundHandler);
